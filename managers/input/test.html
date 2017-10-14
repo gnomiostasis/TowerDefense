@@ -24,6 +24,26 @@
         console.log('p1 axisY ' + value);
       });
 
+      GAMEPAD[2].on('a', function(value) {
+        console.log('p2 a ' + value);
+      });
+      GAMEPAD[2].on('b', function(value) {
+        console.log('p2 b ' + value);
+      });
+      GAMEPAD[2].on('x', function(value) {
+        console.log('p2 x ' + value);
+      });
+      GAMEPAD[2].on('y', function(value) {
+        console.log('p2 y ' + value);
+      });
+      GAMEPAD[2].on('axisX', function(value) {
+        console.log('p2 axisX ' + value);
+      });
+      GAMEPAD[2].on('axisY', function(value) {
+        console.log('p2 axisY ' + value);
+      });
+
+
       var gamepadManager = new GamepadManager();
       setInterval(function() {
         gamepadManager.update();
