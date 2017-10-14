@@ -2,10 +2,32 @@
   <html>
   </html>
   <body>
+    <script src="Gamepad.js"></script>
     <script src="GamepadManager.js"></script>
     <script>
+      GAMEPAD[1].on('a', function(value) {
+        console.log('p1 a ' + value);
+      });
+      GAMEPAD[1].on('b', function(value) {
+        console.log('p1 b ' + value);
+      });
+      GAMEPAD[1].on('x', function(value) {
+        console.log('p1 x ' + value);
+      });
+      GAMEPAD[1].on('y', function(value) {
+        console.log('p1 y ' + value);
+      });
+      GAMEPAD[1].on('axisX', function(value) {
+        console.log('p1 axisX ' + value);
+      });
+      GAMEPAD[1].on('axisY', function(value) {
+        console.log('p1 axisY ' + value);
+      });
+
       var gamepadManager = new GamepadManager();
-      gamepadManager.update();
+      setInterval(function() {
+        gamepadManager.update();
+      }, 1000/60);
     </script>
   </body>
 </html>
