@@ -36,7 +36,7 @@ TowerManager.prototype.init = function () {
     //this.towers.push(testtower);
 }
 
-TowerManager.prototype.buildTower(player) = function (){
+TowerManager.prototype.buildTower = function(player){
 	if(player ==1){
 	var cursorPos = gridmanager.grid.cursor1;
 	}
