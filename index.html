@@ -17,9 +17,17 @@
          touch-action: none;
       }
    </style>
+<<<<<<< HEAD
     <script src="api/babylon.custom.js"></script>
 	<script src="api/angular.min.js"></script>
     <script src="modules/gamepad.js"></script>
+=======
+   <script src="api/babylon.custom.js"></script>
+   <script src="managers/minion/MinionManager.js"></script>
+   <script src="managers/minion/Minion.js"></script>
+   
+
+>>>>>>> 289defb1cfbc128ac94b97fcdc063fc2394ebff5
 </head>
 <body>
    <canvas id="renderCanvas"></canvas>
@@ -28,6 +36,8 @@
       var canvas = document.querySelector("#renderCanvas");
       // Load the BABYLON 3D engine
       var engine = new BABYLON.Engine(canvas, true);
+
+      var scene = null;
       // -------------------------------------------------------------
       // Here begins a function that we will 'call' just after it's built
       var createScene = function () {
