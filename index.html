@@ -12,10 +12,13 @@
          padding: 0;
       }
       #renderCanvas {
-         width: 100%;
+         width: 80%;
          height: 100%;
          touch-action: none;
       }
+	  .hud{
+		width: 10%;
+		}
    </style>
     <script src="api/babylon.custom.js"></script>
 
@@ -30,6 +33,12 @@
 
 </head>
 <body>
+	<div id="p1hud" class="hud">
+		<div class="face"></div>
+		<div class="stats"></div>
+		<div class="store"></div>
+	</div>
+	
    <canvas id="renderCanvas"></canvas>
    <script type="text/javascript">
       // Get the canvas element from our HTML below
