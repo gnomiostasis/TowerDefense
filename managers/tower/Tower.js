@@ -27,12 +27,16 @@ Tower.prototype.create = function(x,y,player) {
 		this.gameobj[i].rotation.x = geometry[i].xR;
 		this.gameobj[i].rotation.z = geometry[i].yR;
 		
-		this.gameobj[i].position.y = geometry[i].y;
+		this.gameobj[i].position.y = geometry[i].y +.5;
 		this.gameobj[i].position.x = x + geometry[i].x;
 		this.gameobj[i].position.z = y + geometry[i].z;
 		
 		this.gameobj[i].material = new BABYLON.StandardMaterial("matPlan1", scene);
 		this.gameobj[i].material.emissiveColor = geometry[i].color;
+		
+		this.gameobj[i].enableEdgesRendering();    
+		this.gameobj[i].edgesWidth = 4.0;
+		this.gameobj[i].edgesColor = new BABYLON.Color3(0, 0, 0);
 	}
 	
 };

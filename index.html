@@ -65,42 +65,65 @@
          // Dim the light a small amount
          light.intensity = .5;
 		 
+		 var light0 = new BABYLON.DirectionalLight("Dir0", new BABYLON.Vector3(.5, -.7, .15), scene);
+		 light0.intensity = .1;
+		 
+		 
 		 var material_1 = new BABYLON.StandardMaterial("texture1", scene);
-		 material_1.diffuseColor = new BABYLON.Color3(1.0, 0, 0);
+		 material_1.diffuseColor = new BABYLON.Color3.Gray();
 		 
          // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
 		 var wall_1 = BABYLON.Mesh.CreateBox("botWall", 1, scene);
-		 wall_1.position.z = -10.2;
-		 wall_1.position.y = 1;
-		 wall_1.scaling.x = 30;
+		 wall_1.position.z = -10.5;
+		 wall_1.position.y = .5;
+		 wall_1.scaling.x = 31;
+		 wall_1.scaling.y = 2;
 		 wall_1.material = material_1;
 		 
 		 var wall_5 = BABYLON.Mesh.CreateBox("centerWall", 1, scene);
-		 wall_5.position.y = 1;
-		 wall_5.scaling.x = 30;
+		 wall_5.position.y = .5;
+		 wall_5.scaling.x = 31;
 		 wall_5.scaling.z = 2;
+		 wall_5.scaling.y = 2;
 		 wall_5.material = material_1;
 		 
 		 var wall_2 = BABYLON.Mesh.CreateBox("topWall", 1, scene);
-		 wall_2.position.z = 10.2;
-		 wall_2.position.y = 1;
-		 wall_2.scaling.x = 30;
+		 wall_2.position.z = 10.5;
+		 wall_2.position.y = .5;
+		 wall_2.scaling.x = 31;
+		 wall_2.scaling.y = 2;
 		 wall_2.material = material_1;
 		 
 		var wall_3 = BABYLON.Mesh.CreateBox("leftWall", 1, scene);
-		 wall_3.position.x = -15.2;
-		 wall_3.position.y = 1;
-		 wall_3.scaling.z = 20;
+		 wall_3.position.x = -15.5;
+		 wall_3.position.y = .5;
+		 wall_3.scaling.z = 21;
+		 wall_3.scaling.y = 2;
 		 wall_3.material = material_1;
 		 
 		 var wall_4 = BABYLON.Mesh.CreateBox("rightWall", 1, scene);
 		 wall_4.position.x = 15.2;
-		 wall_4.position.y = 1;
-		 wall_4.scaling.z = 20;
+		 wall_4.position.y = .5;
+		 wall_4.scaling.z = 21;
+		 wall_4.scaling.y = 2;
 		 wall_4.material = material_1;
 		 
-         var ground = BABYLON.Mesh.CreateGround("ground1", 30, 20, 1, scene);
-		 ground.material = new BABYLON.GridMaterial("groundMaterial", scene);
+         var ground = BABYLON.Mesh.CreateGround("ground1", 30, 10, 1, scene);
+		
+		 
+		 var ground2 = BABYLON.Mesh.CreateGround("ground2", 30, 10, 1, scene);
+		  
+		 
+		 var material_2 = new BABYLON.StandardMaterial("texture1", scene);
+		 material_2.diffuseColor = new BABYLON.Color3(230/255,231/255,232/255);
+		 
+		 var material_3 = new BABYLON.StandardMaterial("texture1", scene);
+		 material_3.diffuseColor = new BABYLON.Color3(54/255,63/255,69/255);
+		 ground.material = material_2;
+		 ground2.material = material_3;
+		  
+		 ground.position.z =5;
+		 ground2.position.z = -5;
          // Leave this function
          return scene;
       }; // End of createScene function
