@@ -1,6 +1,7 @@
 ﻿function MinionManager()
 {
     this.minions = [];
+    this.updateTime();
 }
 
 MinionManager.prototype.init = function () {
@@ -18,3 +19,7 @@ MinionManager.prototype.update = function () {
         this.minions[minion].update();
     }
 }
+
+MinionManager.prototype.updateTime = function() {
+    this.time = new Date().getTime();
+};
