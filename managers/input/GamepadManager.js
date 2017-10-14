@@ -13,27 +13,33 @@ function GamepadManager() {
 
     if (window.gridmanager) {
         for (var i = 1; i <= 2; i++) {
-            var cursor = gridmanager.grid['cursor' + i];
-            GAMEPAD[i].on('a', function(value) {
-            });
-            GAMEPAD[i].on('b', function(value) {
-            });
-            GAMEPAD[i].on('x', function(value) {
-            });
-            GAMEPAD[i].on('y', function(value) {
-            });
-            GAMEPAD[i].on('axisX', function(value) {
-                if (value > 0)
-                    cursor.moveRight();
-                else if (value < 0)
-                    cursor.moveLeft();
-            });
-            GAMEPAD[i].on('axisY', function(value) {
-                if (value > 0)
-                    cursor.moveDown();
-                else if (value < 0)
-                    cursor.moveUp();
-            });
+            (function() {
+                var cursor = gridmanager.grid['cursor' + i];
+                GAMEPAD[i].on('a', function(value, state) {
+                });
+                GAMEPAD[i].on('b', function(value, state) {
+                });
+                GAMEPAD[i].on('x', function(value, state) {
+                });
+                GAMEPAD[i].on('y', function(value, state) {
+                });
+                GAMEPAD[i].on('axisX', function(value, state) {
+                    if (state.mode === MODE.BUILD) {
+                        if (value > 0)
+                            cursor.moveRight();
+                        else if (value < 0)
+                            cursor.moveLeft();
+                    }
+                });
+                GAMEPAD[i].on('axisY', function(value, state) {
+                    if (state.mode === MODE.BUILD) {
+                        if (value > 0)
+                            cursor.moveDown();
+                        else if (value < 0)
+                            cursor.moveUp();
+                    }
+                });
+            })();
         }
     }
 
@@ -140,11 +146,11 @@ GamepadManager.prototype.processGamepadState = function(gamepad, state) {
     for (var axis in this.axes)
         if (this.axes[axis] === 1 && (oldState[axis] != state[axis]
                 || (state[axis] != 0 && dT >= threshold))) {
-            GAMEPAD[state.player].trigger(axis, state[axis]);
+            GAMEPAD[state.player].trigger(axis, state[axis], state);
             state.lastAxisTrigger = currTime;
         }
     
     for (var button in this.buttons)
         if (this.buttons[button] === 1 && oldState[button] != state[button])
-            GAMEPAD[state.player].trigger(button, state[button]);
+            GAMEPAD[state.player].trigger(button, state[button], state);
 };
