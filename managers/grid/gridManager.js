@@ -22,8 +22,11 @@ function initGridManager()
 			cursor.gameobject.material.emissiveColor = new BABYLON.Color4(0, 0, 1,.2);	
 		}
 	
-		cursor.getSelf = function() {
-			return this;
+		cursor.getPos = function() {
+			return {
+				x: cursor.x,
+				y: cursor.z
+			};
 		}
 		
 		cursor.moveLeft= function(){
