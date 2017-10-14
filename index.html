@@ -30,11 +30,13 @@
       var canvas = document.querySelector("#renderCanvas");
       // Load the BABYLON 3D engine
       var engine = new BABYLON.Engine(canvas, true);
+
+      var scene = null;
       // -------------------------------------------------------------
       // Here begins a function that we will 'call' just after it's built
       var createScene = function () {
          // Now create a basic Babylon Scene object
-         var scene = new BABYLON.Scene(engine);
+         scene = new BABYLON.Scene(engine);
          // Change the scene background color to green.
          scene.clearColor = new BABYLON.Color3(0, 1, 0);
          // This creates and positions a free camera
