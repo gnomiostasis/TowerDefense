@@ -28,8 +28,8 @@ Tower.prototype.create = function(x,y,player) {
 		this.gameobj[i].rotation.z = geometry[i].yR;
 		
 		this.gameobj[i].position.y = geometry[i].y;
-		this.gameobj[i].position.x = x+ 0.5 + geometry[i].x;
-		this.gameobj[i].position.z = y + 0.5 + geometry[i].z;
+		this.gameobj[i].position.x = x + geometry[i].x;
+		this.gameobj[i].position.z = y + geometry[i].z;
 		
 		this.gameobj[i].material = new BABYLON.StandardMaterial("matPlan1", scene);
 		this.gameobj[i].material.emissiveColor = geometry[i].color;

@@ -9,7 +9,7 @@ function TowerManager() {
 	
     design : 
 	[
-	{prime: "box",x:0,y:.5,z:0,xS:1,yS:1,zS:1,xR:0,yR:0,Zr:0, color: this.color = new BABYLON.Color3(0, 1, 0)},
+	{prime: "box",x:0,y:0,z:0,xS:1,yS:1,zS:1,xR:0,yR:0,Zr:0, color: this.color = new BABYLON.Color3(0, 1, 0)},
 	],
     material:null,
 	attackSpeed: null,
@@ -47,6 +47,9 @@ TowerManager.prototype.buildTower = function(player,type){
 	var tower = new Tower(type);
     tower.create(cursorPos.x,cursorPos.z,0);
     this.towers.push(tower);
+	if (gridmanager.grid.getGridItem(cursorPos.x-.5,cursorPos.z-.5) != null){
+		gridmanager.grid.addItemToGrid(cursorPos.x-.5,cursorPos.z-.5);
+	}
 }
 
 TowerManager.prototype.update = function() {

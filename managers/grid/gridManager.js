@@ -92,23 +92,22 @@ function initGridManager()
 	
 	
 	function createGrid(){
-		var grid = new Array(60);
-		for (var i=0; i<90; i++){
-			grid[i] = new Array(19);
-				for(var j=0; j<18; j++){
-					grid[i][j] = null;
+		var grid = {};
+		for (var i=-15; i<=15; i++){
+				for(var j=-9; j<=9; j++){
+					grid[i+','+j] = null;
 				}
 		}
 		
-		grid.addItemToGrid = function(x,y,item){
-			grid[x][y] = item;
+		grid.addItemToGrid = function(x,z,item){
+			grid[x+','+z] = item;
 		}
-		grid.removeItemFromGrid = function(x,y){
-			grid[x][y]=null;
+		grid.removeItemFromGrid = function(x,z){
+			grid[x+','+z]=null;
 		}
 		
-		grid.getGridItem = function(x,y){
-			return grid[x][y];
+		grid.getGridItem = function(x,z){
+			return grid[x+','+z];
 		}
 		
 		grid.update = function(){}
