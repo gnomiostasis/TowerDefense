@@ -17,7 +17,7 @@ function GamepadManager() {
                 var cursor = gridmanager.grid['cursor' + i];
                 GAMEPAD[i].on('a', function(value, state) {
                     if (state.mode === MODE.BUILD) {
-                        towermanager.buildTower(state.player, 0);
+                        towermanager.buildTower(state.player, 1);
                     }
                 });
                 GAMEPAD[i].on('b', function(value, state) {

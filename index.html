@@ -63,10 +63,10 @@
          // This creates a light, aiming 0,1,0 - to the sky.
          var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, .5, .5), scene);
          // Dim the light a small amount
-         light.intensity = .5;
+         light.intensity = 1;
 		 
 		 var light0 = new BABYLON.DirectionalLight("Dir0", new BABYLON.Vector3(.5, -.7, .15), scene);
-		 light0.intensity = .1;
+		 light0.intensity = .5;
 		 
 		 
 		 var material_1 = new BABYLON.StandardMaterial("texture1", scene);
