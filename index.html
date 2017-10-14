@@ -25,6 +25,7 @@
    <script src="api/babylon.custom.js"></script>
    <script src="managers/minion/MinionManager.js"></script>
    <script src="managers/minion/Minion.js"></script>
+   <script src="managers/grid/gridManager.js"></script>
    
 
 </head>
@@ -61,7 +62,7 @@
 		 
          // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
 		 var wall_1 = BABYLON.Mesh.CreateBox("botWall", 1, scene);
-		 wall_1.position.z = -20;
+		 wall_1.position.z = -20.2;
 		 wall_1.position.y = 1;
 		 wall_1.scaling.x = 60;
 		 wall_1.material = material_1;
@@ -69,27 +70,29 @@
 		 var wall_5 = BABYLON.Mesh.CreateBox("centerWall", 1, scene);
 		 wall_5.position.y = 1;
 		 wall_5.scaling.x = 60;
+		 wall_5.scaling.z = 2;
 		 wall_5.material = material_1;
 		 
 		 var wall_2 = BABYLON.Mesh.CreateBox("topWall", 1, scene);
-		 wall_2.position.z = 20;
+		 wall_2.position.z = 20.2;
 		 wall_2.position.y = 1;
 		 wall_2.scaling.x = 60;
 		 wall_2.material = material_1;
 		 
 		var wall_3 = BABYLON.Mesh.CreateBox("leftWall", 1, scene);
-		 wall_3.position.x = -30;
+		 wall_3.position.x = -30.2;
 		 wall_3.position.y = 1;
 		 wall_3.scaling.z = 40;
 		 wall_3.material = material_1;
 		 
 		 var wall_4 = BABYLON.Mesh.CreateBox("rightWall", 1, scene);
-		 wall_4.position.x = 30;
+		 wall_4.position.x = 30.2;
 		 wall_4.position.y = 1;
 		 wall_4.scaling.z = 40;
 		 wall_4.material = material_1;
 		 
          var ground = BABYLON.Mesh.CreateGround("ground1", 60, 40, 1, scene);
+		 ground.material = new BABYLON.GridMaterial("groundMaterial", scene);
          // Leave this function
          return scene;
       }; // End of createScene function
