@@ -1,7 +1,7 @@
 function initGridManager()
 {
-	this.p1 = createGrid();
-	this.p2 = createGrid();
+	this.grid = createGrid();
+	
 	
 	function createCursor(){
 		var cursor = {
@@ -37,7 +37,7 @@ function initGridManager()
 			
 		}
 		
-		cursor.moveUp= function(){
+		cursor.moveDown= function(){
 			cursor.z -=1;
 			cursor.gameobject.position.z-=1;
 			if(cursor.z<-10){
@@ -46,7 +46,7 @@ function initGridManager()
 			}
 		}
 		
-		cursor.moveDown= function(){
+		cursor.moveUp= function(){
 			cursor.z +=1;
 			cursor.gameobject.position.z+=1;
 			if(cursor.z>10){
@@ -81,15 +81,15 @@ function initGridManager()
 		
 		grid.update = function(){}
 		
-		grid.cursor = createCursor();
+		grid.cursor1 = createCursor();
+		grid.cursor2 = createCursor();
 		return grid;
 		
 		
 	}
 	
     this.update = function(){
-		this.p1.update();
-		this.p2.update();
+		this.grid.update();
 	}
 	
 	return this;

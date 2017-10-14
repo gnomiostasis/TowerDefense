@@ -17,15 +17,15 @@ function GamepadManager() {
         });
         GAMEPAD[1].on('axisX', function(value) {
             if (value > 0)
-                gridmanager.p1.cursor.moveRight();
+                gridmanager.grid.cursor1.moveRight();
             else if (value < 0)
-                gridmanager.p1.cursor.moveLeft();
+                gridmanager.grid.cursor1.moveLeft();
         });
         GAMEPAD[1].on('axisY', function(value) {
             if (value > 0)
-                gridmanager.p1.cursor.moveDown();
+                gridmanager.grid.cursor1.moveDown();
             else if (value < 0)
-                gridmanager.p1.cursor.moveUp();
+                gridmanager.grid.cursor1.moveUp();
         });
 
         GAMEPAD[2].on('a', function(value) {
@@ -38,15 +38,15 @@ function GamepadManager() {
         });
         GAMEPAD[2].on('axisX', function(value) {
             if (value > 0)
-                gridmanager.p2.cursor.moveRight();
+                gridmanager.grid.cursor2.moveRight();
             else if (value < 0)
-                gridmanager.p2.cursor.moveLeft();
+                gridmanager.grid.cursor2.moveLeft();
         });
         GAMEPAD[2].on('axisY', function(value) {
             if (value > 0)
-                gridmanager.p2.cursor.moveDown();
+                gridmanager.grid.cursor2.moveDown();
             else if (value < 0)
-                gridmanager.p2.cursor.moveUp();
+                gridmanager.grid.cursor2.moveUp();
         });
     }
 
