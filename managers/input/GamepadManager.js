@@ -1,9 +1,6 @@
 // GamepadManager.js
 
-var MODE = {
-    SELECT: 1,
-    BUILD: 2
-};
+TOWER_TYPES = [0, 1];
 
 function GamepadManager() {
     this.buttons = {a: 1, b: 1, x: 1, y: 1};
@@ -16,43 +13,27 @@ function GamepadManager() {
             (function() {
                 var cursor = gridmanager.grid['cursor' + i];
                 GAMEPAD[i].on('a', function(value, state) {
-                    if (state.mode === MODE.BUILD) {
-                        towermanager.buildTower(state.player, 0);
-                    }
+                    towermanager.buildTower(state.player, state.towerType);
                 });
                 GAMEPAD[i].on('b', function(value, state) {
                 });
                 GAMEPAD[i].on('x', function(value, state) {
-                    if (value) {
-                        if (state.mode === MODE.BUILD)
-                            state.mode = MODE.SELECT;
-                        else
-                            state.mode = MODE.BUILD;
-                    }
+                    state.towerType = (TOWER_TYPES.length + state.towerType - 1) % TOWER_TYPES.length;
                 });
                 GAMEPAD[i].on('y', function(value, state) {
-                    if (value) {
-                        if (state.mode === MODE.BUILD)
-                            state.mode = MODE.SELECT;
-                        else
-                            state.mode = MODE.BUILD;
-                    }
+                    state.towerType = ++state.towerType % TOWER_TYPES.length;
                 });
                 GAMEPAD[i].on('axisX', function(value, state) {
-                    if (state.mode === MODE.BUILD) {
-                        if (value > 0)
-                            cursor.moveRight();
-                        else if (value < 0)
-                            cursor.moveLeft();
-                    }
+                    if (value > 0)
+                        cursor.moveRight();
+                    else if (value < 0)
+                        cursor.moveLeft();
                 });
                 GAMEPAD[i].on('axisY', function(value, state) {
-                    if (state.mode === MODE.BUILD) {
-                        if (value > 0)
-                            cursor.moveDown();
-                        else if (value < 0)
-                            cursor.moveUp();
-                    }
+                    if (value > 0)
+                        cursor.moveDown();
+                    else if (value < 0)
+                        cursor.moveUp();
                 });
             })();
         }
@@ -71,7 +52,7 @@ GamepadManager.prototype.newDefaultState = function(player) {
         axisX: 0,
         axisY: 0,
         lastAxisTrigger: 0,
-        mode: MODE.BUILD
+        towerType: 0
     };
 };
 
