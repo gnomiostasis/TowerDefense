@@ -31,12 +31,11 @@
       // Load the BABYLON 3D engine
       var engine = new BABYLON.Engine(canvas, true);
 
-      var scene = null;
       // -------------------------------------------------------------
       // Here begins a function that we will 'call' just after it's built
       var createScene = function () {
          // Now create a basic Babylon Scene object
-         scene = new BABYLON.Scene(engine);
+         var scene = new BABYLON.Scene(engine);
          // Change the scene background color to green.
          scene.clearColor = new BABYLON.Color3(0, 1, 0);
          // This creates and positions a free camera
@@ -47,7 +46,7 @@
          // This attaches the camera to the canvas
          camera.attachControl(canvas, false);
          // This creates a light, aiming 0,1,0 - to the sky.
-         var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+         var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, .5, .5), scene);
          // Dim the light a small amount
          light.intensity = .5;
 		 
@@ -96,8 +95,13 @@
       // -------------------------------------------------------------
       // Now, call the createScene function that you just finished creating
       var scene = createScene();
+
+       //Create minion manager to update on each render loop.
+      var minionmanager = new MinionManager();
+      minionmanager.init();
       // Register a render loop to repeatedly render the scene
       engine.runRenderLoop(function () {
+          minionmanager.update();
          scene.render();
       });
       // Watch for browser/canvas resize events
