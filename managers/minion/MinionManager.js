@@ -5,8 +5,10 @@
 
 MinionManager.prototype.init = function () {
     //var testmin = new Minion();
-    //testmin.create();
+    //testmin.create(9.5, -9.5);
+    //testmin.moveDown();
     //this.minions.push(testmin);
+    
 }
 MinionManager.prototype.update = function () {
     //loop through each minion and update that bitch    
