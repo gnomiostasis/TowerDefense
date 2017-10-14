@@ -17,8 +17,9 @@
          touch-action: none;
       }
    </style>
-   <script src="api/babylon.custom.js"></script>
-
+    <script src="api/babylon.custom.js"></script>
+	<script src="api/angular.min.js"></script>
+    <script src="modules/gamepad.js"></script>
 </head>
 <body>
    <canvas id="renderCanvas"></canvas>
@@ -100,5 +101,24 @@
          engine.resize();
       });
    </script>
+   
+   <div class="gamepad" ng-repeat="gamepad in gamepads.gamepads track by $index">
+	</div>
+	                    <div class="axes">
+                        <ul>
+                            <li ng-repeat="axis in gamepad.axes track by $index" ng-style="axisStyle(axis)">
+                                <label>AXIS {{$index}}</label>
+                                <value>{{axis | number:6}}</value>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttons">
+                        <ul>
+                            <li ng-repeat="button in gamepad.buttons track by $index" ng-style="buttonStyle(button)">
+                                <label>B{{$index}}</label>
+                                <value>{{buttonValue(button) | number:2}}</value>
+                            </li>
+                        </ul>
+                    </div>
 </body>
 </html>
