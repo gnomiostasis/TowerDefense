@@ -6,38 +6,52 @@ function initGridManager()
 	function createCursor(){
 		var cursor = {
 			x:0,
-			y:0
+			z:0
 		}
 		
+		cursor.gameobject = BABYLON.Mesh.CreateBox("plane", 1, scene);
+		cursor.gameobject.position.y = .2;
+		//cursor.gameobject.position.x=cursor.x;
+		//cursor.gameobject.position.z = cursor.z;
 		cursor.getSelf = function() {
 			return this;
 		}
 		
 		cursor.moveLeft= function(){
-			this.x -=1;
-			if(x<0){
-				x = 0;
+			cursor.x -=1;
+			cursor.gameobject.position.x-=1;
+			if(cursor.x<-15){
+				cursor.x = -15;
+				//cursor.gameobject.position.x=cursor.x;
 			}
+			
 		}
 		
 		cursor.moveRight= function(){
-			this.x +=1;
-			if(x>59){
-				x = 59;
+			cursor.x +=1;
+			cursor.gameobject.position.x+=1;
+			if(cursor.x>15){
+				cursor.x = 15;
+				//cursor.gameobject.position.x=cursor.x;
 			}
+			
 		}
 		
 		cursor.moveUp= function(){
-			this.y -=1;
-			if(y<0){
-				y = 0;
+			cursor.z -=1;
+			cursor.gameobject.position.z-=1;
+			if(cursor.z<-10){
+				cursor.z = -10;
+				//cursor.gameobject.position.z = cursor.z;
 			}
 		}
 		
 		cursor.moveDown= function(){
-			this.y +=1;
-			if(y>18){
-				y = 18;
+			cursor.z +=1;
+			cursor.gameobject.position.z+=1;
+			if(cursor.z>10){
+				cursor.z = 10;
+				//cursor.gameobject.position.z = cursor.z;
 			}
 		}
 		

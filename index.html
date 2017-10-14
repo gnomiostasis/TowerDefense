@@ -19,7 +19,6 @@
    </style>
     <script src="api/babylon.custom.js"></script>
 	<script src="api/angular.min.js"></script>
-    <script src="modules/gamepad.js"></script>
 
    <script src="api/babylon.custom.js"></script>
    <script src="managers/minion/MinionManager.js"></script>
@@ -107,6 +106,9 @@
 	  //Create tower manager to update on each render loop.
       var towermanager = new TowerManager();
       towermanager.init();
+	  
+	  var gridmanager = initGridManager();
+	  
       // Register a render loop to repeatedly render the scene
       engine.runRenderLoop(function () {
          minionmanager.update();
