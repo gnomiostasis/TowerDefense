@@ -87,7 +87,7 @@ function initGridManager()
 		
 	}
 	
-    function update(){
+    this.update = function(){
 		this.p1.update();
 		this.p2.update();
 	}
