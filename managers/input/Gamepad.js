@@ -11,11 +11,11 @@ Gamepad.prototype.on = function(name, func) {
     this.listeners[name].push(func);
 };
 
-Gamepad.prototype.trigger = function(name, value) {
+Gamepad.prototype.trigger = function(name, value, status) {
     if (this.listeners[name] != null) {
         for (var i = 0; i < this.listeners[name].length; i++) {
             try {
-                this.listeners[name][i](value);
+                this.listeners[name][i](value, status);
             }
             catch (e) {
                 console.log(e);
