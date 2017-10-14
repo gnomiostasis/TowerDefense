@@ -1,0 +1,5 @@
+// Gamepad.js
+
+function Gamepad() {
+    
+}
