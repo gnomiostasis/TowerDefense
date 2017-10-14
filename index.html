@@ -17,7 +17,6 @@
          touch-action: none;
       }
    </style>
-<<<<<<< HEAD
     <script src="api/babylon.custom.js"></script>
 	<script src="api/angular.min.js"></script>
     <script src="modules/gamepad.js"></script>
@@ -25,6 +24,8 @@
    <script src="api/babylon.custom.js"></script>
    <script src="managers/minion/MinionManager.js"></script>
    <script src="managers/minion/Minion.js"></script>
+   <script src="managers/tower/TowerManager.js"></script>
+   <script src="managers/tower/Tower.js"></script>
    <script src="managers/grid/gridManager.js"></script>
    
 
@@ -45,7 +46,7 @@
          // Change the scene background color to green.
          scene.clearColor = new BABYLON.Color3(0, 1, 0);
          // This creates and positions a free camera
-         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 70, 0), scene);
+         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 25, 0), scene);
 		 camera.inputs.clear();
          // This targets the camera to scene origin
          camera.setTarget(BABYLON.Vector3.Zero());
@@ -61,36 +62,36 @@
 		 
          // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
 		 var wall_1 = BABYLON.Mesh.CreateBox("botWall", 1, scene);
-		 wall_1.position.z = -20.2;
+		 wall_1.position.z = -10.2;
 		 wall_1.position.y = 1;
-		 wall_1.scaling.x = 60;
+		 wall_1.scaling.x = 30;
 		 wall_1.material = material_1;
 		 
 		 var wall_5 = BABYLON.Mesh.CreateBox("centerWall", 1, scene);
 		 wall_5.position.y = 1;
-		 wall_5.scaling.x = 60;
+		 wall_5.scaling.x = 30;
 		 wall_5.scaling.z = 2;
 		 wall_5.material = material_1;
 		 
 		 var wall_2 = BABYLON.Mesh.CreateBox("topWall", 1, scene);
-		 wall_2.position.z = 20.2;
+		 wall_2.position.z = 10.2;
 		 wall_2.position.y = 1;
-		 wall_2.scaling.x = 60;
+		 wall_2.scaling.x = 30;
 		 wall_2.material = material_1;
 		 
 		var wall_3 = BABYLON.Mesh.CreateBox("leftWall", 1, scene);
-		 wall_3.position.x = -30.2;
+		 wall_3.position.x = -15.2;
 		 wall_3.position.y = 1;
-		 wall_3.scaling.z = 40;
+		 wall_3.scaling.z = 20;
 		 wall_3.material = material_1;
 		 
 		 var wall_4 = BABYLON.Mesh.CreateBox("rightWall", 1, scene);
-		 wall_4.position.x = 30.2;
+		 wall_4.position.x = 15.2;
 		 wall_4.position.y = 1;
-		 wall_4.scaling.z = 40;
+		 wall_4.scaling.z = 20;
 		 wall_4.material = material_1;
 		 
-         var ground = BABYLON.Mesh.CreateGround("ground1", 60, 40, 1, scene);
+         var ground = BABYLON.Mesh.CreateGround("ground1", 30, 20, 1, scene);
 		 ground.material = new BABYLON.GridMaterial("groundMaterial", scene);
          // Leave this function
          return scene;
@@ -102,9 +103,14 @@
        //Create minion manager to update on each render loop.
       var minionmanager = new MinionManager();
       minionmanager.init();
+	  
+	  //Create tower manager to update on each render loop.
+      var towermanager = new TowerManager();
+      towermanager.init();
       // Register a render loop to repeatedly render the scene
       engine.runRenderLoop(function () {
-          minionmanager.update();
+         minionmanager.update();
+		 towermanager.update();
          scene.render();
       });
       // Watch for browser/canvas resize events
