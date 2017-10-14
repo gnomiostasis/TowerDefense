@@ -16,6 +16,9 @@ function GamepadManager() {
             (function() {
                 var cursor = gridmanager.grid['cursor' + i];
                 GAMEPAD[i].on('a', function(value, state) {
+                    if (state.mode === MODE.BUILD) {
+                        towermanager.buildTower(state.player, 0);
+                    }
                 });
                 GAMEPAD[i].on('b', function(value, state) {
                 });
@@ -28,6 +31,12 @@ function GamepadManager() {
                     }
                 });
                 GAMEPAD[i].on('y', function(value, state) {
+                    if (value) {
+                        if (state.mode === MODE.BUILD)
+                            state.mode = MODE.SELECT;
+                        else
+                            state.mode = MODE.BUILD;
+                    }
                 });
                 GAMEPAD[i].on('axisX', function(value, state) {
                     if (state.mode === MODE.BUILD) {
