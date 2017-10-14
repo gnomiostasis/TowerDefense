@@ -48,7 +48,7 @@ TowerManager.prototype.buildTower = function(player,type){
     tower.create(cursorPos.x,cursorPos.z,0);
     this.towers.push(tower);
 	if (gridmanager.grid.getGridItem(cursorPos.x-.5,cursorPos.z-.5) == null){
-		gridmanager.grid.addItemToGrid(cursorPos.x-.5,cursorPos.z-.5);
+		gridmanager.grid.addItemToGrid(cursorPos.x-.5,cursorPos.z-.5,tower);
 	}
 }
 
