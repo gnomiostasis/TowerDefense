@@ -1,7 +1,7 @@
 // GamepadManager.js
 
 var MODE = {
-    SELECT_TOWER: 1,
+    SELECT: 1,
     BUILD: 2
 };
 
@@ -20,6 +20,12 @@ function GamepadManager() {
                 GAMEPAD[i].on('b', function(value, state) {
                 });
                 GAMEPAD[i].on('x', function(value, state) {
+                    if (value) {
+                        if (state.mode === MODE.BUILD)
+                            state.mode = MODE.SELECT;
+                        else
+                            state.mode = MODE.BUILD;
+                    }
                 });
                 GAMEPAD[i].on('y', function(value, state) {
                 });
