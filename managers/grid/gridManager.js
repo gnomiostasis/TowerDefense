@@ -94,11 +94,12 @@ function initGridManager()
 	function createGrid(){
 		var grid = {};
 		for (var i=-15; i<=15; i++){
-				for(var j=-9; j<=9; j++){
-					grid[i+','+j] = null;
-				}
+            for(var j=-9; j<=9; j++){
+                grid[i+','+j] = null;
+            }
+            grid[i+','+0] = true;
 		}
-		
+
 		grid.addItemToGrid = function(x,z,item){
 			grid[x+','+z] = item;
 		}
