@@ -31,16 +31,46 @@
    <script src="managers/grid/gridManager.js"></script>
    <script src="managers/input/Gamepad.js"></script>
    <script src="managers/input/GamepadManager.js"></script>
+    <script src="managers/resource/Player.js"></script>
+    <script src="managers/resource/ResouceManager.js"></script>
+
+    <link rel="stylesheet" href="css/GameUI.css" />
+    <link rel="stylesheet" href="css/Index.css" />
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 
 </head>
 <body>
+    
 	<div id="p1hud" class="hud">
-		<div class="face"></div>
-		<div class="stats"></div>
-		<div class="store"></div>
+        <div class="face"></div>
+        <div class="stats">
+            <span class="time_label">Time</span>
+            <div class="time">0</div>
+            <span class="resources_label">Resources</span>
+            <div id="player1_resources">0</div>
+        </div>
+        <div class="store">
+            <div class="store_title">STORE</div>
+            <div class="store_area"></div>
+        </div>
 	</div>
 	
    <canvas id="renderCanvas"></canvas>
+
+    <div id="p2hud" class="hud">
+        <div class="face"></div>
+        <div class="stats">
+            <span class="time_label">Time</span>
+            <div class="time">0</div>
+            <span class="resources_label">Resources</span>
+            <div id="player2_resources">0</div>
+        </div>
+        <div class="store">
+            <div class="store_title">STORE</div>
+            <div class="store_area"></div>
+        </div>
+    </div>
+
    <script type="text/javascript">
       // Get the canvas element from our HTML below
       var canvas = document.querySelector("#renderCanvas");
@@ -55,7 +85,7 @@
          // Change the scene background color to green.
          scene.clearColor = new BABYLON.Color3(0, 0, 0);
          // This creates and positions a free camera
-         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 25, 0), scene);
+         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 26, 0), scene);
 		 camera.inputs.clear();
          // This targets the camera to scene origin
          camera.setTarget(BABYLON.Vector3.Zero());
@@ -162,11 +192,14 @@
 	  
 	  var gamepadmanager = new GamepadManager();
 	  
+      var resourcemanager = new ResourceManager();
       // Register a render loop to repeatedly render the scene
       engine.runRenderLoop(function () {
+         resourcemanager.update();
          minionmanager.update();
 		 towermanager.update();
 		 gamepadmanager.update();
+		 resourcemanager.update();
          scene.render();
       });
       // Watch for browser/canvas resize events
