@@ -18,6 +18,7 @@ MinionManager.prototype.update = function () {
         //check if need to die
         this.minions[i].update();
 		if(this.minions[i].dead){
+            this.minions[i].gameobj.dispose();
 			this.minions.splice(i,1);
 		}
     }
