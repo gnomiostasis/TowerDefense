@@ -29,7 +29,7 @@ Minion.prototype.update = function () {
         var target = this.target;
         if (pos.x == target.x && pos.y == target.y) {
             // blow up!
-            var resman = this.player == 0 ? resourcemanager.player1 : resourcemanager.player2;
+            var resman = this.player == 2 ? resourcemanager.player1 : resourcemanager.player2;
             resman.health -= 1;
             this.destroy();
             return;
