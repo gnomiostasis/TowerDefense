@@ -99,7 +99,7 @@ Minion.prototype.destroy = function () {
 
 }
 
-Minion.prototype.takeDamage(){
+Minion.prototype.takeDamage= function(){
 	this.health-=1;
 	if(this.health==0){
 		//die
