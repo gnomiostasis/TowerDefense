@@ -95,8 +95,8 @@ Minion.prototype.create = function (x,z) {
 }
 
 Minion.prototype.destroy = function () {
-    //Probably jsut remove from renderer and stuff like that
-
+    //Probably just remove from renderer and stuff like that
+    this.dead = true;
 }
 
 Minion.prototype.takeDamage= function(){
