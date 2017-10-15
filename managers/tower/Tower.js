@@ -17,7 +17,7 @@ Tower.prototype.create = function(x,y,player) {
 			this.gameobj[i] = BABYLON.Mesh.CreateSphere(id, 8, 1, scene);
 		} else 
 		if(geometry[i].prime === "cylinder"){
-			this.gameobj[i] =  BABYLON.Mesh.CreateCylinder("cylinder", 1, 1, 1, 8, 1, scene);
+			this.gameobj[i] =  BABYLON.Mesh.CreateCylinder("cylinder", 1, .3, 1, 8, 1, scene);
 		}
 		this.gameobj[i].scaling.y = geometry[i].yS;
 		this.gameobj[i].scaling.x = geometry[i].xS;
