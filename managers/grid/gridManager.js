@@ -17,9 +17,9 @@ function initGridManager()
 		cursor.gameobject.position.z = cursor.z;
 		cursor.gameobject.material = new BABYLON.StandardMaterial("matPlan1", scene);
 		if (mirror>0){
-			cursor.gameobject.material.emissiveColor = new BABYLON.Color4(1, 0, 0,.2);
+			cursor.gameobject.material.diffuseColor = new BABYLON.Color4(242/255,79/255,81/255,.2);
 		}else{
-			cursor.gameobject.material.emissiveColor = new BABYLON.Color4(0, 0, 1,.2);	
+			cursor.gameobject.material.diffuseColor = new BABYLON.Color4(33/255,133/255,197/255,.2);	
 		}
 	
 		cursor.getPos = function() {
@@ -92,23 +92,23 @@ function initGridManager()
 	
 	
 	function createGrid(){
-		var grid = new Array(60);
-		for (var i=0; i<90; i++){
-			grid[i] = new Array(19);
-				for(var j=0; j<18; j++){
-					grid[i][j] = null;
-				}
+		var grid = {};
+		for (var i=-15; i<=15; i++){
+            for(var j=-9; j<=9; j++){
+                grid[i+','+j] = null;
+            }
+            grid[i+','+0] = true;
+		}
+
+		grid.addItemToGrid = function(x,z,item){
+			grid[x+','+z] = item;
+		}
+		grid.removeItemFromGrid = function(x,z){
+			grid[x+','+z]=null;
 		}
 		
-		grid.addItemToGrid = function(x,y,item){
-			grid[x][y] = item;
-		}
-		grid.removeItemFromGrid = function(x,y){
-			grid[x][y]=null;
-		}
-		
-		grid.getGridItem = function(x,y){
-			return grid[x][y];
+		grid.getGridItem = function(x,z){
+			return grid[x+','+z];
 		}
 		
 		grid.update = function(){}
