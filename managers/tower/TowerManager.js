@@ -42,6 +42,18 @@ TowerManager.prototype.init = function () {
 }
 
 TowerManager.prototype.buildTower = function(player,type){
+    var cost = RESOURCE_COSTS[type];
+    var resMan = resourcemanager['player' + player];
+
+    if (type == 2) {
+        var inc = 50;
+        if (resMan.resources >= cost && minionmanager.frequency[player] > inc) {
+            minionmanager.frequency[player] -= 50;
+            resMan.resources -= cost;
+        }
+        
+        return;
+    }
 	if(player ==1){
 	var cursorPos = gridmanager.grid.cursor1;
 	}
@@ -59,8 +71,6 @@ TowerManager.prototype.buildTower = function(player,type){
         return;
     }
 
-    var cost = RESOURCE_COSTS[type];
-    var resMan = resourcemanager['player' + player];
     if (resMan.resources >= cost) {
         resMan.resources -= cost;
     }

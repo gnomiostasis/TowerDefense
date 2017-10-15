@@ -93,8 +93,8 @@ function initGridManager()
 	
 	function createGrid(){
 		var grid = {};
-		for (var i=-15; i<=15; i++){
-            for(var j=-9; j<=9; j++){
+		for (var i=-15; i<=14; i++){
+            for(var j=-9; j<8; j++){
                 grid[i+','+j] = null;
             }
             grid[i+','+0] = true;

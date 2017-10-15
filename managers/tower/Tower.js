@@ -74,7 +74,10 @@ Tower.prototype.create = function(x,y,player) {
 
 Tower.prototype.update = function() {
     if (this.type==1){
-		console.log("test");
+		if (this.bullet !=null){
+				this.bullet.dispose();
+				this.bullet = null;
+		}
 		if (this.atkSpd == 100){
 			
 			for(var i=0;i<minionmanager.minions.length;i++){
@@ -84,12 +87,22 @@ Tower.prototype.update = function() {
 						<4)&& Math.abs(
 						minionmanager.minions[i].gameobj.position.z - this.gameobj[0].position.z)<4)
 						{
-							//this.bullet = BABYLON.Mesh.CreateSphere(id, 8, 1, scene);
-							//this.bullet.scaling.y=.2;
-							//this.bullet.scaling.x=.2;
-							//this.bullet.scaling.z=.2;
-							//this.bullet.position.x = this.gameobj[0].position.x;
-							//this.bullet.position.z = this.gameobj[0].position.z;
+							this.bullet = BABYLON.Mesh.CreateSphere("bullet", 8, 1, scene);
+							this.bullet.scaling.y=.3;
+							this.bullet.scaling.x=10;
+							this.bullet.scaling.z=.3;
+							this.bullet.position.x = (this.gameobj[0].position.x+minionmanager.minions[i].gameobj.position.x)/2; 
+							this.bullet.position.z = (this.gameobj[0].position.z+minionmanager.minions[i].gameobj.position.z)/2;
+							function angle(cx, cy, ex, ey) {
+							  var dy = ey - cy;
+							  var dx = ex - cx;
+							  var theta = Math.atan2(dy, dx); // range (-PI, PI]
+							  theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+							  //if (theta < 0) theta = 360 + theta; // range [0, 360)
+							  return theta;
+							}
+							
+							this.bullet.rotation.y = (angle(this.gameobj[0].position.x,this.gameobj[0].position.z,minionmanager.minions[i].gameobj.position.x,minionmanager.minions[i].gameobj.position.z)/360);
 							
 							this.atkSpd = 0;
 							minionmanager.minions[i].takeDamage();
