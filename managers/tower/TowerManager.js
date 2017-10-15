@@ -42,22 +42,36 @@ TowerManager.prototype.buildTower = function(player,type){
 	if(player ==2){
 	var cursorPos = gridmanager.grid.cursor2;
 	}
+    var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
+    var posKey = pos.x + ',' + pos.z;
 	
-	var tower = new Tower(type);
-    tower.create(cursorPos.x,cursorPos.z,player);
-    this.towers.push(tower);
-	if (gridmanager.grid.getGridItem(cursorPos.x-.5,cursorPos.z-.5) == null){
-		gridmanager.grid.addItemToGrid(cursorPos.x-.5,cursorPos.z-.5,tower);
+	if (gridmanager.grid.getGridItem(pos.x,pos.z) == null){
+        gridmanager.grid[posKey] = true;
 	}
+    else {
+        return;
+    }
     var start, end;
     if (player == 1) {
-        start = {x: 14, y: 1};
-        end = {x: -15, y: 1};
+        start = {x: -15, y: 1};
+        end = {x: 14, y: 1};
     }
     else if (player == 2) {
-        start = {x: -15, y: -2};
-        end = {x: 14, y: -2};
+        start = {x: 14, y: -2};
+        end = {x: -15, y: -2};
     }
+    var path = gridmath.aStar(start, end);
+    if (path.length > 0) {
+        var tower = new Tower(type);
+        tower.create(cursorPos.x,cursorPos.z,player);
+        this.towers.push(tower);
+        gridmanager.grid[posKey] = null;
+        gridmanager.grid.addItemToGrid(pos.x,pos.z,tower);
+    }
+    else {
+        gridmanager.grid[posKey] = null;
+    }
+    
 }
 
 TowerManager.prototype.update = function() {
