@@ -17,9 +17,28 @@ Minion.prototype.moveRight = function () { GenericMove(this, "right", this.speed
 
 
 Minion.prototype.update = function () {
+    if (this.isReadyToMove) {
+        var pos = {x: this.gameobj.position.x, y: this.gameobj.position.y};
+        var target = this.target;
+        if (pos.x == target.x && pos.y == target.y) {
+            return;
+        }
+        var path = gridmath.aStar(pos, target);
+        if (path.length <= 0) {
+            return;
+        }
+        var next = path[0];
+        if (next.x > pos.x) {
+            this.moveRight();
+            console.log('moveRight');
+        }
+        else if (next.x < pos.x) {
+            this.moveLeft();
+            console.log('moveLeft');
+        }
+    }
     //this.bounce();
     this.move();
-    
 }
 
 Minion.prototype.move = function () {
