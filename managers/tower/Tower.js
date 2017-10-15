@@ -84,6 +84,13 @@ Tower.prototype.update = function() {
 						<4)&& Math.abs(
 						minionmanager.minions[i].gameobj.position.z - this.gameobj[0].position.z)<4)
 						{
+							//this.bullet = BABYLON.Mesh.CreateSphere(id, 8, 1, scene);
+							//this.bullet.scaling.y=.2;
+							//this.bullet.scaling.x=.2;
+							//this.bullet.scaling.z=.2;
+							//this.bullet.position.x = this.gameobj[0].position.x;
+							//this.bullet.position.z = this.gameobj[0].position.z;
+							
 							this.atkSpd = 0;
 							minionmanager.minions[i].takeDamage();
 							return;

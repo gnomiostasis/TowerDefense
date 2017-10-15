@@ -92,7 +92,6 @@ Minion.prototype.create = function (x,z) {
     this.gameobj.position.z = z!=undefined?z:10;
     this.gameobj.material = new BABYLON.StandardMaterial("matPlan1", scene);
     this.gameobj.material.diffuseColor = this.color;
-    this.gameobj.material.backFaceCulling = true;
 }
 
 Minion.prototype.destroy = function () {
@@ -115,7 +114,7 @@ Minion.prototype.takeDamage= function(){
 	
 	if(this.health==0){
 		this.dead = true;
-		
+		this.gameobj.dispose();	
 	}
 	this.gameobj.material.diffuseColor = this.color;
 }
