@@ -43,32 +43,74 @@
 <body>
     
 	<div id="p1hud" class="hud">
-        <div class="face"></div>
+        <div class="face">
+            <img src="img/RedTeam_Healthy.png" />
+        </div>
         <div class="stats">
+            <span class="health_label">Health</span>
+            <div id="player1_health">100</div>
             <span class="time_label">Time</span>
             <div class="time">0</div>
             <span class="resources_label">Resources</span>
             <div id="player1_resources">0</div>
         </div>
         <div class="store">
-            <div class="store_title">STORE</div>
-            <div class="store_area"></div>
+            <div class="store_title">Build</div>
+            
+            <div class="store_area">
+                <div class="option_1">
+                    <span>100</span>
+                    <div><img class="buildimg" src="img/RedTeam_Wall.png" /></div>
+                </div>
+
+                <div class="option_2">
+                    <span>500</span>
+                    <div><img class="buildimg" src="img/RedTeam_Tower.png" /></div>
+                </div>
+
+                <div class="option_3">
+                    <span>1000</span>
+                    <div><img class="buildimg" src="img/RedTeam_Spawn.png" /></div>
+                </div>
+            </div>
+           
         </div>
 	</div>
 	
    <canvas id="renderCanvas"></canvas>
 
     <div id="p2hud" class="hud">
-        <div class="face"></div>
+        <div class="face">
+            <img src="img/BlueTeam_Healthy.png" />
+        </div>
         <div class="stats">
+            <span class="health_label">Health</span>
+            <div id="player2_health">100</div>
             <span class="time_label">Time</span>
             <div class="time">0</div>
             <span class="resources_label">Resources</span>
             <div id="player2_resources">0</div>
         </div>
         <div class="store">
-            <div class="store_title">STORE</div>
-            <div class="store_area"></div>
+            <div class="store_title">Build</div>
+
+            <div class="store_area">
+                <div class="option_1">
+                    <span>100</span>
+                    <div><img class="buildimg" src="img/BlueTeam_Wall.png" /></div>
+                </div>
+
+                <div class="option_2">
+                    <span>500</span>
+                    <div><img class="buildimg" src="img/BlueTeam_Tower.png" /></div>
+                </div>
+
+                <div class="option_3">
+                    <span>1000</span>
+                    <div><img class="buildimg" src="img/BlueTeam_Spawn.png" /></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
