@@ -43,7 +43,6 @@ TowerManager.prototype.buildTower = function(player,type){
 	var cursorPos = gridmanager.grid.cursor2;
 	}
     var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
-    console.log(pos);
     var posKey = pos.x + ',' + pos.z;
 	
 	if (gridmanager.grid.getGridItem(pos.x,pos.z) == null){
@@ -62,7 +61,6 @@ TowerManager.prototype.buildTower = function(player,type){
         end = {x: -15, y: -2};
     }
     var path = gridmath.aStar(start, end);
-    console.log(path.length);
     if (path.length > 0) {
         var tower = new Tower(type);
         tower.create(cursorPos.x,cursorPos.z,player);
