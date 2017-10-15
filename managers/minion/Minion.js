@@ -36,19 +36,15 @@ Minion.prototype.update = function () {
         var next = path[0];
         if (next.x > pos.x) {
             this.moveRight();
-            console.log('moveRight');
         }
         else if (next.x < pos.x) {
             this.moveLeft();
-            console.log('moveLeft');
         }
         else if (next.y > pos.y) {
             this.moveUp();
-            console.log('moveUp');
         }
         else if (next.y < pos.y) {
             this.moveDown();
-            console.log('moveDown');
         }
         else {
             console.log('?');

@@ -49,6 +49,15 @@ TowerManager.prototype.buildTower = function(player,type){
 	if (gridmanager.grid.getGridItem(cursorPos.x-.5,cursorPos.z-.5) == null){
 		gridmanager.grid.addItemToGrid(cursorPos.x-.5,cursorPos.z-.5,tower);
 	}
+    var start, end;
+    if (player == 1) {
+        start = {x: 14, y: 1};
+        end = {x: -15, y: 1};
+    }
+    else if (player == 2) {
+        start = {x: -15, y: -2};
+        end = {x: 14, y: -2};
+    }
 }
 
 TowerManager.prototype.update = function() {
