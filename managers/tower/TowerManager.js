@@ -61,4 +61,9 @@ TowerManager.prototype.buildTower = function(player,type){
 }
 
 TowerManager.prototype.update = function() {
+	for(var i=0; i<this.towers.length;i++){
+		if(this.towers[i].type==1){
+			this.towers[i].update();
+		}
+	}
 };

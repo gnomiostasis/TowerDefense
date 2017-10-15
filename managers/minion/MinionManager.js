@@ -17,17 +17,20 @@ MinionManager.prototype.update = function () {
         //Check if need to spawn
         //check if need to die
         this.minions[i].update();
+		if(this.minions[i].dead){
+			this.minions.splice(i,1);
+		}
     }
+	
+
 
     if (this.tick % 1000 === 0) {
-        var m = new Minion();
-        m.player = 1;
+        var m = new Minion(2);
         m.create(-14.5, 1.5);
         m.target = {x: 14, y: 1};
         this.minions.push(m);
         
-        var m = new Minion();
-        m.player = 2;
+        var m = new Minion(1);
         m.create(14.5, -1.5);
         m.target = {x: -15, y: -2};
         this.minions.push(m);

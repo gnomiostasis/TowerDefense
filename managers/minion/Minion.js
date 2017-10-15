@@ -1,7 +1,8 @@
-﻿function Minion() {
-	this.player = 1;
-    this.speed = 0.05;    //I don't know if this is an ok value
+﻿function Minion(player) {
+    this.player = player;
+	this.speed = 0.05;    //I don't know if this is an ok value
     this.health = 4;
+	this.dead = false;
     if(this.player == 1){
 		this.color = new BABYLON.Color3(1, 0, 0);
 	}else{
@@ -97,9 +98,22 @@ Minion.prototype.destroy = function () {
 
 Minion.prototype.takeDamage= function(){
 	this.health-=1;
-	if(this.health==0){
-		//die
+	this.gameobj.scaling.x-=.2;
+	this.gameobj.scaling.y-=.2;
+	this.gameobj.scaling.z-=.2;
+	var pigment = 255* this.health/4;
+	
+	if(this.player == 1){
+		this.color = new BABYLON.Color3(pigment, 0, 0);
+	}else{
+		this.color = new BABYLON.Color3(0, 0, pigment);
 	}
+	
+	if(this.health==0){
+		this.dead = true;
+		
+	}
+	this.gameobj.material.diffuseColor = this.color;
 }
 
 
