@@ -97,7 +97,8 @@ function initGridManager()
             for(var j=-9; j<8; j++){
                 grid[i+','+j] = null;
             }
-            grid[i+','+0] = true;
+            grid[i+',0'] = true;
+            grid[i+',-1'] = true;
 		}
 
 		grid.addItemToGrid = function(x,z,item){
