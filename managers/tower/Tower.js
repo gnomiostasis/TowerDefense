@@ -78,7 +78,7 @@ Tower.prototype.update = function() {
 		if (this.atkSpd == 100){
 			
 			for(var i=0;i<minionmanager.minions.length;i++){
-				if (minions[i].player != this.player){
+				if (minionmanager.minions[i].player != this.player){
 					if((Math.abs(
 						minionmanager.minions[i].gameobj.position.x - this.gameobj[0].position.x)
 						<4)&& Math.abs(
