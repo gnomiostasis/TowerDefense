@@ -21,13 +21,15 @@ MinionManager.prototype.update = function () {
 
     if (this.tick % 1000 === 0) {
         var m = new Minion();
-        m.create(14.5, 1.5);
-        m.target = {x: -15, y: 1};
+        m.player = 1;
+        m.create(-14.5, 1.5);
+        m.target = {x: 14, y: 1};
         this.minions.push(m);
         
         var m = new Minion();
-        m.create(-14.5, -1.5);
-        m.target = {x: 14, y: -2};
+        m.player = 2;
+        m.create(14.5, -1.5);
+        m.target = {x: -15, y: -2};
         this.minions.push(m);
     }
 
