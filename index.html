@@ -245,7 +245,8 @@
       var resourcemanager = new ResourceManager();
 	  
 	  
-	 //var soundmanager = soundManagerInit();
+      var soundmanager = soundManagerInit();
+      soundmanager["Menu"].play();
 	 
       // Register a render loop to repeatedly render the scene
       engine.runRenderLoop(function () {
