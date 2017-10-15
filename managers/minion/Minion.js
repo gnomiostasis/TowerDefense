@@ -1,7 +1,13 @@
 ﻿function Minion() {
+	this.player = 1;
     this.speed = 0.05;    //I don't know if this is an ok value
-    this.health = 100;
-    this.color = new BABYLON.Color3(0, 1, 0);  //R, G, B.... This is an arbitrary color
+    this.health = 4;
+    if(this.player == 1){
+		this.color = new BABYLON.Color3(1, 0, 0);
+	}else{
+		this.color = new BABYLON.Color3(0, 0, 1);
+	}
+	  //R, G, B.... This is an arbitrary color
     this.gameobj = null;
     this.material = null;
     this.direction = null;
@@ -84,13 +90,20 @@ Minion.prototype.create = function (x,z) {
     this.gameobj.position.x = x!=undefined?x:10;
     this.gameobj.position.z = z!=undefined?z:10;
     this.gameobj.material = new BABYLON.StandardMaterial("matPlan1", scene);
-    this.gameobj.material.emissiveColor = this.color;
+    this.gameobj.material.diffuseColor = this.color;
     this.gameobj.material.backFaceCulling = true;
 }
 
 Minion.prototype.destroy = function () {
     //Probably jsut remove from renderer and stuff like that
 
+}
+
+Minion.prototype.takeDamage(){
+	this.health-=1;
+	if(this.health==0){
+		//die
+	}
 }
 
 
