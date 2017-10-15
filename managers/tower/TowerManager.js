@@ -26,6 +26,29 @@ function TowerManager() {
     material:null,
 	attackSpeed: null,
 	range : null
+	},
+	{
+	
+    design : 
+	[
+	{prime: "box",x:0,y:0,z:0,xS:.5,yS:5,zS:.5,xR:0,yR:0,zR:0, color: 2},
+	{prime: "cylinder",x:0,y:3.5,z:0,xS:.5,yS:2,zS:.5,xR:0,yR:0,zR:0, color: 3}
+	],
+    material:null,
+	attackSpeed: null,
+	range : null
+	},
+	{
+	
+    design : 
+	[
+	{prime: "box",x:0,y:2.5,z:0,xS:.2,yS:2,zS:.2,xR:0,yR:0,zR:0, color: 1},
+	{prime: "sphere",x:0,y:3.5,z:0,xS:.5,yS:.5,zS:.5,xR:0,yR:0,zR:0, color: 3},
+	{prime: "cylinder",x:0,y:0,z:0,xS:1,yS:5,zS:1,xR:0,yR:0,zR:0, color: 2}
+	],
+    material:null,
+	attackSpeed: null,
+	range : null
 	}
 	];
 }
