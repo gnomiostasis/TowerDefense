@@ -1,7 +1,7 @@
 ﻿function MinionManager()
 {
     this.minions = [];
-    this.updateTime();
+    this.tick = 0;
 }
 
 MinionManager.prototype.init = function () {
@@ -13,13 +13,29 @@ MinionManager.prototype.init = function () {
 }
 MinionManager.prototype.update = function () {
     //loop through each minion and update that bitch    
-    for (var minion in this.minions) {
+    for (var i = 0; i < this.minions.length; i++) {
         //Check if need to spawn
         //check if need to die
-        this.minions[minion].update();
+        this.minions[i].update();
+		if(this.minions[i].dead){
+			this.minions.splice(i,1);
+		}
     }
+	
+
+
+    if (this.tick % 1000 === 0) {
+        var m = new Minion(2);
+        m.create(-14.5, 1.5);
+        m.target = {x: 14, y: 1};
+        this.minions.push(m);
+        
+        var m = new Minion(1);
+        m.create(14.5, -1.5);
+        m.target = {x: -15, y: -2};
+        this.minions.push(m);
+    }
+
+    this.tick++;
 }
 
-MinionManager.prototype.updateTime = function() {
-    this.time = new Date().getTime();
-};

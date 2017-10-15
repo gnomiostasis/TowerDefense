@@ -18,10 +18,12 @@ function GamepadManager() {
                 GAMEPAD[i].on('b', function(value, state) {
                 });
                 GAMEPAD[i].on('x', function(value, state) {
-                    state.towerType = (TOWER_TYPES.length + state.towerType - 1) % TOWER_TYPES.length;
+                    if (value)
+                        state.towerType = (TOWER_TYPES.length + state.towerType - 1) % TOWER_TYPES.length;
                 });
                 GAMEPAD[i].on('y', function(value, state) {
-                    state.towerType = ++state.towerType % TOWER_TYPES.length;
+                    if (value)
+                        state.towerType = ++state.towerType % TOWER_TYPES.length;
                 });
                 GAMEPAD[i].on('axisX', function(value, state) {
                     if (value > 0)

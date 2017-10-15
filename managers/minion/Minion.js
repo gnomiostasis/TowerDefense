@@ -1,7 +1,14 @@
-﻿function Minion() {
-    this.speed = 0.05;    //I don't know if this is an ok value
-    this.health = 100;
-    this.color = new BABYLON.Color3(0, 1, 0);  //R, G, B.... This is an arbitrary color
+﻿function Minion(player) {
+    this.player = player;
+	this.speed = 0.05;    //I don't know if this is an ok value
+    this.health = 4;
+	this.dead = false;
+    if(this.player == 1){
+		this.color = new BABYLON.Color3(1, 0, 0);
+	}else{
+		this.color = new BABYLON.Color3(0, 0, 1);
+	}
+	  //R, G, B.... This is an arbitrary color
     this.gameobj = null;
     this.material = null;
     this.direction = null;
@@ -17,7 +24,36 @@ Minion.prototype.moveRight = function () { GenericMove(this, "right", this.speed
 
 
 Minion.prototype.update = function () {
-    this.bounce();
+    if (this.isReadyToMove) {
+        var pos = {x: Math.round(this.gameobj.position.x - 0.5), y: Math.round(this.gameobj.position.z - 0.5)};
+        var target = this.target;
+        if (pos.x == target.x && pos.y == target.y) {
+            return;
+        }
+        var path = gridmath.aStar(pos, target);
+        if (path.length <= 0) {
+            return;
+        }
+        var next = path[0];
+        if (next.x > pos.x) {
+            this.moveRight();
+        }
+        else if (next.x < pos.x) {
+            this.moveLeft();
+        }
+        else if (next.y > pos.y) {
+            this.moveUp();
+        }
+        else if (next.y < pos.y) {
+            this.moveDown();
+        }
+        else {
+            console.log('?');
+            console.log(pos);
+            console.log(next);
+        }
+    }
+    //this.bounce();
     this.move();
 }
 
@@ -37,24 +73,6 @@ Minion.prototype.move = function () {
     else if (this.direction == "down") {
         this.moveDown();
     }
-    else {
-        var rand = Math.floor(Math.random() * 4);
-        switch (rand)
-        {
-            case 0:
-                this.moveUp();
-                break;
-            case 1:
-                this.moveDown();
-                break;
-            case 2:
-                this.moveLeft();
-                break;
-            case 3:
-                this.moveRight();
-                break;
-        }
-    }
 }
 
 Minion.prototype.bounce = function () {
@@ -69,13 +87,33 @@ Minion.prototype.create = function (x,z) {
     this.gameobj.position.x = x!=undefined?x:10;
     this.gameobj.position.z = z!=undefined?z:10;
     this.gameobj.material = new BABYLON.StandardMaterial("matPlan1", scene);
-    this.gameobj.material.emissiveColor = this.color;
+    this.gameobj.material.diffuseColor = this.color;
     this.gameobj.material.backFaceCulling = true;
 }
 
 Minion.prototype.destroy = function () {
     //Probably jsut remove from renderer and stuff like that
 
+}
+
+Minion.prototype.takeDamage= function(){
+	this.health-=1;
+	this.gameobj.scaling.x-=.2;
+	this.gameobj.scaling.y-=.2;
+	this.gameobj.scaling.z-=.2;
+	var pigment = 255* this.health/4;
+	
+	if(this.player == 1){
+		this.color = new BABYLON.Color3(pigment, 0, 0);
+	}else{
+		this.color = new BABYLON.Color3(0, 0, pigment);
+	}
+	
+	if(this.health==0){
+		this.dead = true;
+		
+	}
+	this.gameobj.material.diffuseColor = this.color;
 }
 
 

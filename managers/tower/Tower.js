@@ -4,6 +4,7 @@ function Tower(type) {
 	this.gameobj = [];
 	this.design = towermanager.types[type].design;
 	this.color = towermanager.types[type].color;
+	this.atkSpd = 100;
 }
 
 Tower.prototype.create = function(x,y,player) {
@@ -34,7 +35,6 @@ Tower.prototype.create = function(x,y,player) {
 		this.gameobj[i].material = new BABYLON.StandardMaterial("matPlan1", scene);
 		this.gameobj[i].enableEdgesRendering();    
 		this.gameobj[i].edgesWidth = 4.0;
-		console.log(player);
 		if(player===1){
 			if(geometry[i].color==0){
 			this.gameobj[i].material.diffuseColor = new BABYLON.Color3(230/255, 231/255, 232/255);
@@ -48,8 +48,10 @@ Tower.prototype.create = function(x,y,player) {
 			if(geometry[i].color==3){
 			this.gameobj[i].material.diffuseColor = new BABYLON.Color3(242/255, 79/255, 81/255);
 			}
-			this.gameobj[i].edgesColor = new BABYLON.Color3(0,0,0);
+			
+			
 		} else{
+			this.gameobj[i].edgesColor = new BABYLON.Color4(0,0,1,1);
 			if(geometry[i].color==0){
 			this.gameobj[i].material.diffuseColor = new BABYLON.Color3(54/255, 63/255, 69/255);
 			}else
@@ -62,12 +64,30 @@ Tower.prototype.create = function(x,y,player) {
 			if(geometry[i].color==3){
 			this.gameobj[i].material.diffuseColor = new BABYLON.Color3(33/255, 133/255, 197/255);
 			}
-			this.gameobj[i].edgesColor = new BABYLON.Color3(1, 1, 1);
+			
 		}
 	}
 	
 };
 
 Tower.prototype.update = function() {
-    
+    if (this.type==1){
+		if (this.atkSpd == 100){
+			
+			for(var i=0;i<minionmanager.minions.length;i++){
+				
+				if((math.abs(
+					minionmanager.minions[i].gameobj.position.x - this.gameobj.position.x)
+					<4)&& math.abs(
+					minionmanager.minions[i].gameobj.position.y - this.gameobj.position.y)<4)
+					{
+						this.atkSpd = 0;
+						minionmanager.minions[i].takeDamage();
+						return;
+					}
+			}
+		}else{
+			this.atkSpd++;
+		}
+	}
 };
