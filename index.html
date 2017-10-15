@@ -33,6 +33,7 @@
    <script src="managers/input/GamepadManager.js"></script>
     <script src="managers/resource/Player.js"></script>
     <script src="managers/resource/ResouceManager.js"></script>
+	<script src="managers/sound/sound.js"></script>
 
     <link rel="stylesheet" href="css/GameUI.css" />
     <link rel="stylesheet" href="css/Index.css" />
@@ -85,7 +86,7 @@
          // Change the scene background color to green.
          scene.clearColor = new BABYLON.Color3(0, 0, 0);
          // This creates and positions a free camera
-         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 26, 0), scene);
+         var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 30, 0), scene);
 		 camera.inputs.clear();
          // This targets the camera to scene origin
          camera.setTarget(BABYLON.Vector3.Zero());
@@ -109,13 +110,13 @@
 		 var wall_1 = BABYLON.Mesh.CreateBox("botWall", 1, scene);
 		 wall_1.position.z = -10.5;
 		 wall_1.position.y = .5;
-		 wall_1.scaling.x = 31;
+		 wall_1.scaling.x = 32;
 		 wall_1.scaling.y = 2;
 		 wall_1.material = material_1;
 		 
 		 var wall_5 = BABYLON.Mesh.CreateBox("centerWall", 1, scene);
 		 wall_5.position.y = .5;
-		 wall_5.scaling.x = 26;
+		 wall_5.scaling.x = 24;
 		 wall_5.scaling.z = 2;
 		 wall_5.scaling.y = 2;
 		 wall_5.material = material_1;
@@ -123,7 +124,7 @@
 		 var wall_2 = BABYLON.Mesh.CreateBox("topWall", 1, scene);
 		 wall_2.position.z = 10.5;
 		 wall_2.position.y = .5;
-		 wall_2.scaling.x = 31;
+		 wall_2.scaling.x = 32;
 		 wall_2.scaling.y = 2;
 		 wall_2.material = material_1;
 		 
@@ -145,17 +146,21 @@
 		 p1.position.x = 15.5;
 		 p1.position.y = .5;
 		 p1.scaling.z = 4;
-		 p1.scaling.y = 4;
+		 p1.scaling.y = 6;
+		 p1.scaling.x = 3;
 		 material_p1.diffuseColor = new BABYLON.Color3(242/255,79/255,81/255);
 		 p1.material = material_p1;
 		 
 		 var p2 = BABYLON.Mesh.CreateBox("p2base", 1, scene);
-		 p1.position.x = -15.5;
-		 p1.position.y = .5;
-		 p1.scaling.z = 4;
-		 p1.scaling.y = 4;
+		 p2.position.x = -15.5;
+		 p2.position.y = .5;
+		 p2.scaling.z = 4;
+		 p2.scaling.y = 6;
+		 p2.scaling.x = 3;
+		 
 		 material_p2.diffuseColor = new BABYLON.Color3(33/255,133/255,197/255);
 		 p2.material = material_p2;
+		 
 		 
          var ground = BABYLON.Mesh.CreateGround("ground1", 30, 10, 1, scene);
 		
@@ -193,6 +198,10 @@
 	  var gamepadmanager = new GamepadManager();
 	  
       var resourcemanager = new ResourceManager();
+	  
+	  
+	 //var soundmanager = soundManagerInit();
+	 
       // Register a render loop to repeatedly render the scene
       engine.runRenderLoop(function () {
          resourcemanager.update();
