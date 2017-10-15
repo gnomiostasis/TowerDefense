@@ -32,6 +32,9 @@ Minion.prototype.update = function () {
             var resman = this.player == 2 ? resourcemanager.player1 : resourcemanager.player2;
             resman.health -= 1;
             this.destroy();
+            if (resman.health <= 0) {
+                window.location.href = 'P' + this.player + 'Wins.html';
+            }
             return;
         }
         var path = gridmath.aStar(pos, target);
