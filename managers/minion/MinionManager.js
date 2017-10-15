@@ -5,7 +5,7 @@
 
 MinionManager.prototype.init = function () {
     //var testmin = new Minion();
-    //testmin.create(9.5, -9.5);
+    //testmin.create(1.5, -1.5); //Should create at an .5
     //testmin.moveDown();
     //this.minions.push(testmin);
     

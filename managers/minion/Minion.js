@@ -17,9 +17,8 @@ Minion.prototype.moveRight = function () { GenericMove(this, "right", this.speed
 
 
 Minion.prototype.update = function () {
-    //this.bounce();
+    this.bounce();
     this.move();
-    
 }
 
 Minion.prototype.move = function () {
