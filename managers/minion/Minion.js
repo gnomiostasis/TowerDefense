@@ -28,6 +28,10 @@ Minion.prototype.update = function () {
         var pos = {x: Math.round(this.gameobj.position.x - 0.5), y: Math.round(this.gameobj.position.z - 0.5)};
         var target = this.target;
         if (pos.x == target.x && pos.y == target.y) {
+            // blow up!
+            var resman = this.player == 0 ? resourcemanager.player1 : resourcemanager.player2;
+            resman.health -= 1;
+            this.destroy();
             return;
         }
         var path = gridmath.aStar(pos, target);

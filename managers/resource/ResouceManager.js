@@ -15,3 +15,46 @@ ResourceManager.prototype.update = function ()
         x[i].innerHTML = Math.floor(this.time/10)
     }
 }
+
+ResourceManager.prototype.highlight = function(player, buildtype)
+{
+    if (player == 1)
+    {
+        $('.player1_highlight').removeClass('player1_highlight');
+        switch (buildtype)
+        {
+            case 0:
+                //wall
+                $("#p1hud .option_0").addClass("player1_highlight")
+                break;
+            case 1:
+                //tower
+                $("#p1hud .option_1").addClass("player1_highlight")
+                break;
+            case 2:
+                //spawn
+                $("#p1hud .option_2").addClass("player1_highlight")
+                break;
+        }
+    }
+    else if (player == 2) {
+        $('.player2_highlight').removeClass('player2_highlight');
+
+        switch (buildtype) {
+            case 0:
+                //wall
+                $("#p2hud .option_0").addClass("player2_highlight")
+                break;
+            case 1:
+                //tower
+                $("#p2hud .option_1").addClass("player2_highlight")
+                break;
+            case 2:
+                //spawn
+                $("#p2hud .option_2").addClass("player2_highlight")
+                break;
+        }
+    }
+
+
+}
