@@ -28,7 +28,6 @@ Minion.prototype.update = function () {
             return;
         }
         var next = path[0];
-        console.log(next);
         if (next.x > pos.x) {
             this.moveRight();
             console.log('moveRight');
@@ -37,13 +36,18 @@ Minion.prototype.update = function () {
             this.moveLeft();
             console.log('moveLeft');
         }
-        else if (next.y < pos.z) {
+        else if (next.y > pos.y) {
+            this.moveUp();
+            console.log('moveUp');
+        }
+        else if (next.y < pos.y) {
             this.moveDown();
             console.log('moveDown');
         }
-        else if (next.y > pos.z) {
-            this.moveUp();
-            console.log('moveUp');
+        else {
+            console.log('?');
+            console.log(pos);
+            console.log(next);
         }
     }
     //this.bounce();
