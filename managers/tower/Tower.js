@@ -1,10 +1,12 @@
 // Tower.js
 
-function Tower(type) {
+function Tower(type, player) {
 	this.gameobj = [];
 	this.design = towermanager.types[type].design;
 	this.color = towermanager.types[type].color;
 	this.atkSpd = 100;
+	this.type = type;
+	this.player = player;
 }
 
 Tower.prototype.create = function(x,y,player) {
@@ -72,19 +74,28 @@ Tower.prototype.create = function(x,y,player) {
 
 Tower.prototype.update = function() {
     if (this.type==1){
+		console.log("test");
 		if (this.atkSpd == 100){
 			
 			for(var i=0;i<minionmanager.minions.length;i++){
-				
-				if((math.abs(
-					minionmanager.minions[i].gameobj.position.x - this.gameobj.position.x)
-					<4)&& math.abs(
-					minionmanager.minions[i].gameobj.position.y - this.gameobj.position.y)<4)
-					{
-						this.atkSpd = 0;
-						minionmanager.minions[i].takeDamage();
-						return;
-					}
+				if (minionmanager.minions[i].player != this.player){
+					if((Math.abs(
+						minionmanager.minions[i].gameobj.position.x - this.gameobj[0].position.x)
+						<4)&& Math.abs(
+						minionmanager.minions[i].gameobj.position.z - this.gameobj[0].position.z)<4)
+						{
+							//this.bullet = BABYLON.Mesh.CreateSphere(id, 8, 1, scene);
+							//this.bullet.scaling.y=.2;
+							//this.bullet.scaling.x=.2;
+							//this.bullet.scaling.z=.2;
+							//this.bullet.position.x = this.gameobj[0].position.x;
+							//this.bullet.position.z = this.gameobj[0].position.z;
+							
+							this.atkSpd = 0;
+							minionmanager.minions[i].takeDamage();
+							return;
+						}
+				}
 			}
 		}else{
 			this.atkSpd++;

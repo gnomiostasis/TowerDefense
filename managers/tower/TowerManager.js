@@ -1,5 +1,11 @@
 // TowerManager.js
 
+RESOURCE_COSTS = {
+    0: 100,
+    1: 500,
+    2: 1000
+}
+
 function TowerManager() {
 	
 	this.towers = [];
@@ -42,7 +48,8 @@ TowerManager.prototype.buildTower = function(player,type){
 	if(player ==2){
 	var cursorPos = gridmanager.grid.cursor2;
 	}
-    var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
+
+	var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
     var posKey = pos.x + ',' + pos.z;
 	
 	if (gridmanager.grid.getGridItem(pos.x,pos.z) == null){
@@ -51,6 +58,17 @@ TowerManager.prototype.buildTower = function(player,type){
     else {
         return;
     }
+
+    var cost = RESOURCE_COSTS[type];
+    var resMan = resourcemanager['player' + player];
+    if (resMan.resources >= cost) {
+        resMan.resources -= cost;
+    }
+    else {
+        gridmanager.grid[posKey] = null;
+        return;
+    };
+
     var start, end;
     if (player == 1) {
         start = {x: -15, y: 1};
@@ -62,7 +80,7 @@ TowerManager.prototype.buildTower = function(player,type){
     }
     var path = gridmath.aStar(start, end);
     if (path.length > 0) {
-        var tower = new Tower(type);
+        var tower = new Tower(type, player);
         tower.create(cursorPos.x,cursorPos.z,player);
         this.towers.push(tower);
         gridmanager.grid[posKey] = null;
