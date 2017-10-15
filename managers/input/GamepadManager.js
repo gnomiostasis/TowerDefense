@@ -1,6 +1,6 @@
 // GamepadManager.js
 
-TOWER_TYPES = [0, 1];
+TOWER_TYPES = [0, 1, 2];
 
 function GamepadManager() {
     this.buttons = {a: 1, b: 1, x: 1, y: 1};
@@ -18,12 +18,16 @@ function GamepadManager() {
                 GAMEPAD[i].on('b', function(value, state) {
                 });
                 GAMEPAD[i].on('x', function(value, state) {
-                    if (value)
+                    if (value) {
                         state.towerType = (TOWER_TYPES.length + state.towerType - 1) % TOWER_TYPES.length;
+                        resourcemanager.highlight(state.player, state.towerType);
+                    }
                 });
                 GAMEPAD[i].on('y', function(value, state) {
-                    if (value)
+                    if (value) {
                         state.towerType = ++state.towerType % TOWER_TYPES.length;
+                        resourcemanager.highlight(state.player, state.towerType);
+                    }
                 });
                 GAMEPAD[i].on('axisX', function(value, state) {
                     if (value > 0)
@@ -56,6 +60,7 @@ GamepadManager.prototype.newDefaultState = function(player) {
         lastAxisTrigger: 0,
         towerType: 0
     };
+    resourcemanager.highlight(player, 0);
 };
 
 GamepadManager.prototype.cloneState = function(state) {
