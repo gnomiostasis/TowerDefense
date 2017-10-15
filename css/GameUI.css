@@ -35,12 +35,21 @@
     border-radius: 5px;
 }
 
+
 #p1hud .face {
     background-color:rgb(242,79,81);
 }
 
 #p2hud .face {
     background-color:rgb(33,133,197);
+}
+
+#p1hud .health_label{
+    color:rgb(242,79,81)
+}
+
+#p2hud .health_label {
+    color:rgb(33,133,197);
 }
 
 #p1hud .resources_label{
@@ -84,4 +93,34 @@
 
 .store {
 margin-top: 50px;
+}
+.buildimg {
+ width: 50px;
+ height: 50px;
+}
+
+.store_area *{
+    display: table;
+  margin: 0 auto;
+}
+
+.store_area > * {
+    padding-top:10px;
+    padding-bottom: 10px;
+    width: 100%;
+    border: 0;
+    border-radius: 15px;
+}
+
+.player1_highlight {
+    background-color:rgb(242,79,81);
+}
+
+.player2_highlight {
+    background-color:rgb(33,133,197);
+}
+
+.face img {
+height: 100%;
+width: 100%;
 }
