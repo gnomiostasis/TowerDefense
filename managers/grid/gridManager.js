@@ -17,9 +17,9 @@ function initGridManager()
 		cursor.gameobject.position.z = cursor.z;
 		cursor.gameobject.material = new BABYLON.StandardMaterial("matPlan1", scene);
 		if (mirror>0){
-			cursor.gameobject.material.emissiveColor = new BABYLON.Color4(242/255,79/255,81/255,.2);
+			cursor.gameobject.material.diffuseColor = new BABYLON.Color4(242/255,79/255,81/255,.2);
 		}else{
-			cursor.gameobject.material.emissiveColor = new BABYLON.Color4(33/255,133/255,197/255,.2);	
+			cursor.gameobject.material.diffuseColor = new BABYLON.Color4(33/255,133/255,197/255,.2);	
 		}
 	
 		cursor.getPos = function() {

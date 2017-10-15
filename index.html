@@ -53,7 +53,7 @@
          // Now create a basic Babylon Scene object
          var scene = new BABYLON.Scene(engine);
          // Change the scene background color to green.
-         scene.clearColor = new BABYLON.Color3(0, 1, 0);
+         scene.clearColor = new BABYLON.Color3(0, 0, 0);
          // This creates and positions a free camera
          var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 25, 0), scene);
 		 camera.inputs.clear();
@@ -64,13 +64,15 @@
          // This creates a light, aiming 0,1,0 - to the sky.
          var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, .5, .5), scene);
          // Dim the light a small amount
-         light.intensity = .5;
+         light.intensity = 1;
 		 
 		 var light0 = new BABYLON.DirectionalLight("Dir0", new BABYLON.Vector3(.5, -.7, .15), scene);
-		 light0.intensity = .1;
+		 light0.intensity = .5;
 		 
 		 
 		 var material_1 = new BABYLON.StandardMaterial("texture1", scene);
+		 var material_p1 = new BABYLON.StandardMaterial("texture1", scene);
+		 var material_p2 = new BABYLON.StandardMaterial("texture1", scene);
 		 material_1.diffuseColor = new BABYLON.Color3.Gray();
 		 
          // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
@@ -83,7 +85,7 @@
 		 
 		 var wall_5 = BABYLON.Mesh.CreateBox("centerWall", 1, scene);
 		 wall_5.position.y = .5;
-		 wall_5.scaling.x = 31;
+		 wall_5.scaling.x = 26;
 		 wall_5.scaling.z = 2;
 		 wall_5.scaling.y = 2;
 		 wall_5.material = material_1;
@@ -103,11 +105,27 @@
 		 wall_3.material = material_1;
 		 
 		 var wall_4 = BABYLON.Mesh.CreateBox("rightWall", 1, scene);
-		 wall_4.position.x = 15.2;
+		 wall_4.position.x = 15.5;
 		 wall_4.position.y = .5;
 		 wall_4.scaling.z = 21;
 		 wall_4.scaling.y = 2;
 		 wall_4.material = material_1;
+		 
+		 var p1 = BABYLON.Mesh.CreateBox("p1base", 1, scene);
+		 p1.position.x = 15.5;
+		 p1.position.y = .5;
+		 p1.scaling.z = 4;
+		 p1.scaling.y = 4;
+		 material_p1.diffuseColor = new BABYLON.Color3(242/255,79/255,81/255);
+		 p1.material = material_p1;
+		 
+		 var p2 = BABYLON.Mesh.CreateBox("p2base", 1, scene);
+		 p1.position.x = -15.5;
+		 p1.position.y = .5;
+		 p1.scaling.z = 4;
+		 p1.scaling.y = 4;
+		 material_p2.diffuseColor = new BABYLON.Color3(33/255,133/255,197/255);
+		 p2.material = material_p2;
 		 
          var ground = BABYLON.Mesh.CreateGround("ground1", 30, 10, 1, scene);
 		

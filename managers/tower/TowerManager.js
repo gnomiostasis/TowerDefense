@@ -9,7 +9,7 @@ function TowerManager() {
 	
     design : 
 	[
-	{prime: "box",x:0,y:0,z:0,xS:1,yS:1,zS:1,xR:0,yR:0,Zr:0, color: this.color = new BABYLON.Color3(0, 1, 0)},
+	{prime: "box",x:0,y:0,z:0,xS:1,yS:2,zS:1,xR:0,yR:0,Zr:0, color: 1},
 	],
     material:null,
 	attackSpeed: null,
@@ -19,9 +19,9 @@ function TowerManager() {
 	
     design : 
 	[
-	{prime: "box",x:0,y:.5,z:0,xS:1,yS:1,zS:1,xR:0,yR:0,Zr:0, color: this.color = new BABYLON.Color3(0, 1, 0)},
-	{prime: "cylinder",x:0,y:3,z:0,xS:1,yS:4,zS:1,xR:0,yR:0,Zr:0, color: this.color = new BABYLON.Color3(1, 0, 0)},
-	{prime: "sphere",x:0,y:5,z:0,xS:1.5,yS:1,zS:1.5,xR:0,yR:0,Zr:0, color: this.color = new BABYLON.Color3(0, 0, 1)},
+	{prime: "box",x:0,y:2.5,z:0,xS:.2,yS:2,zS:.2,xR:0,yR:0,zR:0, color: 1},
+	{prime: "sphere",x:0,y:3.5,z:0,xS:.5,yS:.5,zS:.5,xR:0,yR:0,zR:0, color: 3},
+	{prime: "cylinder",x:0,y:0,z:0,xS:1,yS:5,zS:1,xR:0,yR:0,zR:0, color: 2}
 	],
     material:null,
 	attackSpeed: null,
@@ -45,7 +45,7 @@ TowerManager.prototype.buildTower = function(player,type){
 	}
 	
 	var tower = new Tower(type);
-    tower.create(cursorPos.x,cursorPos.z,0);
+    tower.create(cursorPos.x,cursorPos.z,player);
     this.towers.push(tower);
 	if (gridmanager.grid.getGridItem(cursorPos.x-.5,cursorPos.z-.5) == null){
 		gridmanager.grid.addItemToGrid(cursorPos.x-.5,cursorPos.z-.5,tower);
