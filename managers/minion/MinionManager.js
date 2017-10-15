@@ -2,6 +2,7 @@
 {
     this.minions = [];
     this.tick = 0;
+    this.frequency = {1: 500, 2: 500};
 }
 
 MinionManager.prototype.init = function () {
@@ -25,12 +26,13 @@ MinionManager.prototype.update = function () {
 	
 
 
-    if (this.tick % 500 === 0) {
+    if (this.tick % this.frequency[2] === 0) {
         var m = new Minion(2);
         m.create(-14.5, 1.5);
         m.target = {x: 14, y: 1};
         this.minions.push(m);
-        
+    }
+    if (this.tick % this.frequency[1] === 0) {
         var m = new Minion(1);
         m.create(14.5, -1.5);
         m.target = {x: -15, y: -2};
