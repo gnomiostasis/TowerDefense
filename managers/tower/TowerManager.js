@@ -42,7 +42,8 @@ TowerManager.prototype.buildTower = function(player,type){
 	if(player ==2){
 	var cursorPos = gridmanager.grid.cursor2;
 	}
-    var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
+	
+	var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
     var posKey = pos.x + ',' + pos.z;
 	
 	if (gridmanager.grid.getGridItem(pos.x,pos.z) == null){

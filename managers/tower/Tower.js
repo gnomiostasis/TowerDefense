@@ -1,11 +1,12 @@
 // Tower.js
 
-function Tower(type) {
+function Tower(type, player) {
 	this.gameobj = [];
 	this.design = towermanager.types[type].design;
 	this.color = towermanager.types[type].color;
 	this.atkSpd = 100;
 	this.type = type;
+	this.player = player;
 }
 
 Tower.prototype.create = function(x,y,player) {
@@ -77,16 +78,17 @@ Tower.prototype.update = function() {
 		if (this.atkSpd == 100){
 			
 			for(var i=0;i<minionmanager.minions.length;i++){
-				
-				if((Math.abs(
-					minionmanager.minions[i].gameobj.position.x - this.gameobj[0].position.x)
-					<4)&& Math.abs(
-					minionmanager.minions[i].gameobj.position.z - this.gameobj[0].position.z)<4)
-					{
-						this.atkSpd = 0;
-						minionmanager.minions[i].takeDamage();
-						return;
-					}
+				if (minions[i].player != this.player){
+					if((Math.abs(
+						minionmanager.minions[i].gameobj.position.x - this.gameobj[0].position.x)
+						<4)&& Math.abs(
+						minionmanager.minions[i].gameobj.position.z - this.gameobj[0].position.z)<4)
+						{
+							this.atkSpd = 0;
+							minionmanager.minions[i].takeDamage();
+							return;
+						}
+				}
 			}
 		}else{
 			this.atkSpd++;
