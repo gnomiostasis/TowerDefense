@@ -18,7 +18,7 @@ Minion.prototype.moveRight = function () { GenericMove(this, "right", this.speed
 
 Minion.prototype.update = function () {
     if (this.isReadyToMove) {
-        var pos = {x: this.gameobj.position.x, y: this.gameobj.position.y};
+        var pos = {x: Math.round(this.gameobj.position.x - 0.5), y: Math.round(this.gameobj.position.z - 0.5)};
         var target = this.target;
         if (pos.x == target.x && pos.y == target.y) {
             return;
@@ -28,6 +28,7 @@ Minion.prototype.update = function () {
             return;
         }
         var next = path[0];
+        console.log(next);
         if (next.x > pos.x) {
             this.moveRight();
             console.log('moveRight');
@@ -35,6 +36,14 @@ Minion.prototype.update = function () {
         else if (next.x < pos.x) {
             this.moveLeft();
             console.log('moveLeft');
+        }
+        else if (next.y < pos.z) {
+            this.moveDown();
+            console.log('moveDown');
+        }
+        else if (next.y > pos.z) {
+            this.moveUp();
+            console.log('moveUp');
         }
     }
     //this.bounce();
@@ -56,24 +65,6 @@ Minion.prototype.move = function () {
     }
     else if (this.direction == "down") {
         this.moveDown();
-    }
-    else {
-        var rand = Math.floor(Math.random() * 4);
-        switch (rand)
-        {
-            case 0:
-                this.moveUp();
-                break;
-            case 1:
-                this.moveDown();
-                break;
-            case 2:
-                this.moveLeft();
-                break;
-            case 3:
-                this.moveRight();
-                break;
-        }
     }
 }
 
