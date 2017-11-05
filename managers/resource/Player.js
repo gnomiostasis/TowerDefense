@@ -1,6 +1,6 @@
-﻿function Player(id)
+function Player(id)
 {
-    this.resources = 1337;
+    this.resources = 50;
     this.health = 30;
     this.id = id;
 }

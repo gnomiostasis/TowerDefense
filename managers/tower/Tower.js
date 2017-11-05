@@ -76,7 +76,24 @@ Tower.prototype.create = function(x,y,player) {
 Tower.prototype.update = function() {
     if (this.type==1){
 		if (this.bullet !=null){
-
+            this.bullet.stage++;
+            if (this.bullet.stage == 6){
+                this.bullet.target.takeDamage();
+                this.bullet.dispose();
+                this.bullet = null;
+            }
+            else{ 
+                var ratio = this.bullet.stage/6;
+                var x1 = this.gameobj[0].position.x;
+                var y1 = 3;
+                var z1 = this.gameobj[0].position.z;
+                var x2 = this.bullet.target.gameobj.position.x;
+                var y2 = 1;
+                var z2 = this.bullet.target.gameobj.position.z;
+                this.bullet.position.x  = x1 + ((x2-x1)*ratio);
+                this.bullet.position.y = y1 + ((y2-y1)*ratio);
+                this.bullet.position.z = z1 + ((z2-z1)*ratio);
+            }
 		}
 		if (this.atkSpd == 100){
 			
@@ -87,22 +104,19 @@ Tower.prototype.update = function() {
 						<4)&& Math.abs(
 						minionmanager.minions[i].gameobj.position.z - this.gameobj[0].position.z)<4)
 						{
-							//this.bullet = new BABYLON.PointLight("bullet", new BABYLON.Vector3(1, 10, 1), scene);
-							//if (this.player ==1){
-							//	this.bullet.diffuse = new BABYLON.Color3(1, 0, 0);
-							//	this.bullet.specular = new BABYLON.Color3(1, 0, 0);
-							//}else{
-							//	this.bullet.diffuse = new BABYLON.Color3(0, 0, 1);
-							//	this.bullet.specular = new BABYLON.Color3(0, 0, 1);
-							//}
-							//this.bullet.position.x = (this.gameobj[0].position.x); 
-							//this.bullet.position.z = (this.gameobj[0].position.z);
-							//this.bullet.position.y = 3;
-							
-							//this.bullet.intensity = 1;
+							this.bullet = new BABYLON.Mesh.CreateSphere('bullet', 8, .3, scene);
+                            this.bullet.target = minionmanager.minions[i];
+                            this.bullet.stage = 0;
+                            this.bullet.material = new BABYLON.StandardMaterial("matPlan1", scene);
+							if (this.player ==1){
+                                soundmanager["P1Shoot"].play();
+                                this.bullet.material.diffuseColor = new BABYLON.Color3(1,0,0);
+							}else{
+                                soundmanager["P2Shoot"].play();
+                                this.bullet.material.diffuseColor = new BABYLON.Color3(0,0,1);
+							}
 							
 							this.atkSpd = 0;
-							minionmanager.minions[i].takeDamage();
 							return;
 						}
 				}

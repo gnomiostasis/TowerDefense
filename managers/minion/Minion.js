@@ -1,7 +1,8 @@
-﻿function Minion(player) {
+function Minion(player) {
     this.player = player;
 	this.speed = 0.05;    //I don't know if this is an ok value
-    this.health = 4;
+    this.maxhealth = 8;
+    this.health = this.maxhealth;
 	this.dead = false;
     if(this.player == 1){
 		this.color = new BABYLON.Color3(1, 0, 0);
@@ -99,15 +100,16 @@ Minion.prototype.create = function (x,z) {
 
 Minion.prototype.destroy = function () {
     //Probably just remove from renderer and stuff like that
+    soundmanager["minionDeath"].play();
     this.dead = true;
 }
 
 Minion.prototype.takeDamage= function(){
 	this.health-=1;
-	this.gameobj.scaling.x-=.2;
-	this.gameobj.scaling.y-=.2;
-	this.gameobj.scaling.z-=.2;
-	var pigment = 255* this.health/4;
+	this.gameobj.scaling.x-=1/this.maxhealth;
+	this.gameobj.scaling.y-=1/this.maxhealth;
+	this.gameobj.scaling.z-=1/this.maxhealth;
+	var pigment = 255* this.health/this.maxhealth;
 	
 	if(this.player == 1){
 		this.color = new BABYLON.Color3(pigment, 0, 0);
@@ -116,8 +118,7 @@ Minion.prototype.takeDamage= function(){
 	}
 	
 	if(this.health==0){
-		this.dead = true;
-		this.gameobj.dispose();	
+		this.destroy();
 	}
 	this.gameobj.material.diffuseColor = this.color;
 }
