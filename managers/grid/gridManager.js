@@ -5,7 +5,7 @@ function initGridManager()
 	
 	function createCursor(mirror){
 		var cursor = {
-			x:-14.5,
+			x:-14.5*mirror,
 			z:9.5*mirror,
 			maxZ: mirror > 0 ? 9.5 : -1.5,
 			minZ: mirror >0 ? 1.5 : -9.5
@@ -94,7 +94,7 @@ function initGridManager()
 	function createGrid(){
 		var grid = {};
 		for (var i=-15; i<=14; i++){
-            for(var j=-9; j<8; j++){
+            for(var j=-10; j<10; j++){
                 grid[i+','+j] = null;
             }
             grid[i+',0'] = true;
