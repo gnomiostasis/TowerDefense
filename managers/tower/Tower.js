@@ -2,6 +2,7 @@
 
 function Tower(type, player) {
 	this.gameobj = [];
+    this.type = type;
 	this.design = towermanager.types[type].design;
 	this.color = towermanager.types[type].color;
 	this.atkSpd = 100;
@@ -12,6 +13,12 @@ function Tower(type, player) {
 
 Tower.prototype.create = function(x,y,player) {
 	var id = "test";
+        if (this.type == 1){
+        soundmanager["PlaceTower"].play();
+    }
+    else{
+        soundmanager["PlaceWall"].play();
+    }
 	var geometry = this.design;
 	for (var i=0; i<geometry.length; i++){
 		if(geometry[i].prime === "box"){

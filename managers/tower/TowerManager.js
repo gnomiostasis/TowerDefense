@@ -36,15 +36,12 @@ function TowerManager() {
 }
 
 TowerManager.prototype.init = function () {
-    //var testtower = new Tower(0);
-    //testtower.create(5,7,0);
-    //this.towers.push(testtower);
 }
 
 TowerManager.prototype.buildTower = function(player,type){
     var cost = RESOURCE_COSTS[type];
     var resMan = resourcemanager['player' + player];
-
+    
     if (type == 2) {
         var inc = 50;
         if (resMan.resources >= cost && minionmanager.frequency[player] > inc) {
