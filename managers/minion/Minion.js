@@ -109,7 +109,7 @@ Minion.prototype.takeDamage= function(){
 	this.gameobj.scaling.x-=1/this.maxhealth;
 	this.gameobj.scaling.y-=1/this.maxhealth;
 	this.gameobj.scaling.z-=1/this.maxhealth;
-	var pigment = 255* this.health/this.maxhealth;
+	var pigment = this.health/this.maxhealth;
 	
 	if(this.player == 1){
 		this.color = new BABYLON.Color3(pigment, 0, 0);
