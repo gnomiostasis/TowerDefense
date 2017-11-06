@@ -118,6 +118,11 @@ Minion.prototype.takeDamage= function(){
 	}
 	
 	if(this.health==0){
+        if (this.player ==1){
+            resourcemanager.player2.resources += 50;
+        }else{
+            resourcemanager.player1.resources += 50;
+        }
 		this.destroy();
 	}
 	this.gameobj.material.diffuseColor = this.color;
