@@ -1,6 +1,7 @@
 // GamepadManager.js
 
 TOWER_TYPES = [0, 1, 2];
+MIRROR_INPUT = true;
 
 function GamepadManager() {
     this.buttons = {a: 1, b: 1, x: 1, y: 1};
@@ -12,8 +13,13 @@ function GamepadManager() {
         for (var i = 1; i <= 2; i++) {
             (function() {
                 var cursor = gridmanager.grid['cursor' + i];
+                var mirrorCursor = false;
+                if (MIRROR_INPUT)
+                    mirrorCursor = gridmanager.grid['cursor' + ((i % 2) + 1)];
                 GAMEPAD[i].on('a', function(value, state) {
                     towermanager.buildTower(state.player, state.towerType);
+                    if (mirrorCursor)
+                        towermanager.buildTower((state.player % 2) + 1, state.towerType);
                 });
                 GAMEPAD[i].on('b', function(value, state) {
                 });
@@ -21,12 +27,16 @@ function GamepadManager() {
                     if (value) {
                         state.towerType = (TOWER_TYPES.length + state.towerType - 1) % TOWER_TYPES.length;
                         resourcemanager.highlight(state.player, state.towerType);
+                        if (mirrorCursor)
+                            resourcemanager.highlight((state.player % 2) + 1, state.towerType);
                     }
                 });
                 GAMEPAD[i].on('y', function(value, state) {
                     if (value) {
                         state.towerType = ++state.towerType % TOWER_TYPES.length;
                         resourcemanager.highlight(state.player, state.towerType);
+                        if (mirrorCursor)
+                            resourcemanager.highlight((state.player % 2) + 1, state.towerType);
                     }
                 });
                 GAMEPAD[i].on('axisX', function(value, state) {
@@ -34,12 +44,24 @@ function GamepadManager() {
                         cursor.moveRight();
                     else if (value < 0)
                         cursor.moveLeft();
+                    if (mirrorCursor) {
+                        if (value > 0)
+                            mirrorCursor.moveLeft();
+                        else if (value < 0)
+                            mirrorCursor.moveRight();
+                    }
                 });
                 GAMEPAD[i].on('axisY', function(value, state) {
                     if (value > 0)
                         cursor.moveDown();
                     else if (value < 0)
                         cursor.moveUp();
+                    if (mirrorCursor) {
+                        if (value > 0)
+                            mirrorCursor.moveUp();
+                        else if (value < 0)
+                            mirrorCursor.moveDown();
+                    }
                 });
             })();
         }

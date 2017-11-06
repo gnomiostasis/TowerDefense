@@ -95,6 +95,7 @@ TowerManager.prototype.buildTower = function(player,type){
     }
     else {
         gridmanager.grid[posKey] = null;
+        resMan.resources += cost;
     }
     
 }
