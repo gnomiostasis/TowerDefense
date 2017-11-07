@@ -53,7 +53,14 @@ var gridmath = {
         return resultset.subtract(removeset);
     },
     // A* algorithm
-    aStar: function(current, end) {
+    aStar: function(start, end, cacheName) {
+        var current = start;
+        if (cacheName != null) {
+            var result = gridmath.getCachedPath(cacheName, current);
+            if (result != null)
+                return result;
+        }
+        var result = [];
         var openSet = gridmath._set();
         var openHeap = gridmath._heap();
         var closedSet = gridmath._set();
@@ -68,7 +75,8 @@ var gridmath = {
             return path.reverse();
         }
         function getH(tile) {
-            return Math.abs(end.x - tile.x) + Math.abs(end.y - tile.y);
+            return gridmath.hypot(end.x - tile.x, end.y - tile.y);
+            //return Math.abs(end.x - tile.x) + Math.abs(end.y - tile.y);
         }
         // G: cost to get from start to tile
         current.G = 0;
@@ -80,7 +88,8 @@ var gridmath = {
         while (openSet.getSize()) {
             current = openHeap.pop();
             if (current.x === end.x && current.y === end.y) {
-                return retracePath(current);
+                result = retracePath(current);
+                break;
             }
             openSet.delete(current);
             closedSet.add(current);
@@ -96,7 +105,47 @@ var gridmath = {
                 }
             });
         }
-        return [];
+        if (cacheName != null) {
+            gridmath.cachePath(cacheName, start, result);
+        }
+        return result;
+    },
+    _pathCache: {},
+    getCachedPath: function(cacheName, start) {
+        if (gridmath._pathCache[cacheName] != null)
+            return gridmath._pathCache[cacheName][start.x + ',' + start.y];
+        else
+            return null;
+    },
+    cachePath: function(cacheName, start, path) {
+        if (gridmath._pathCache[cacheName] == null)
+            gridmath._pathCache[cacheName] = {};
+        var cache = gridmath._pathCache[cacheName];
+        cache[start.x + ',' + start.y] = path.length > 0 ? [path[0]] : [];
+        if (path.length > 0)
+            gridmath.cachePath(cacheName, path[0], path.slice(1));
+    },
+    clearPathCache: function(cacheName) {
+        if (cacheName != null)
+            gridmath._pathCache[cacheName] = null;
+        else
+            gridmath._pathCache = {};
+    },
+    copyPathCache: function(sourceName, destName) {
+        gridmath._pathCache[destName] = gridmath._pathCache[sourceName];
+    },
+    movePathCache: function(sourceName, destName) {
+        gridmath.copyPathCache(sourceName, destName);
+        gridmath.clearPathCache(sourceName);
+    },
+    // hypotenuse
+    // http://forums.parallax.com/discussion/147522/dog-leg-hypotenuse-approximation
+    hypot: function(a, b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
+        var hi = Math.max( a, b )
+        var lo = Math.min( a, b )
+        return hi + lo/2;
     },
     // set implementation
     _set: function() {

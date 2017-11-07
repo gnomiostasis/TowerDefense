@@ -85,8 +85,11 @@ TowerManager.prototype.buildTower = function(player,type){
         start = {x: 14, y: -2};
         end = {x: -15, y: -2};
     }
-    var path = gridmath.aStar(start, end);
+    var cacheName = 'temp' + player;
+    gridmath.clearPathCache(cacheName);
+    var path = gridmath.aStar(start, end, cacheName);
     if (path.length > 0) {
+        gridmath.movePathCache(cacheName, player);
         var tower = new Tower(type, player);
         tower.create(cursorPos.x,cursorPos.z,player);
         this.towers.push(tower);

@@ -38,7 +38,7 @@ Minion.prototype.update = function () {
             }
             return;
         }
-        var path = gridmath.aStar(pos, target);
+        var path = gridmath.aStar(pos, target, (this.player % 2) + 1);
         if (path.length <= 0) {
             return;
         }
