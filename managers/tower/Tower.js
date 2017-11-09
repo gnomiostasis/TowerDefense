@@ -133,3 +133,8 @@ Tower.prototype.update = function() {
 		}
 	}
 };
+
+Tower.prototype.destroy = function() {
+    for (var i = 0; i < this.gameobj.length; i++)
+        this.gameobj[i].dispose();
+};

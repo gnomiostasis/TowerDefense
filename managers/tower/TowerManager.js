@@ -101,7 +101,45 @@ TowerManager.prototype.buildTower = function(player,type){
         resMan.resources += cost;
     }
     
-}
+};
+
+TowerManager.prototype.sellTower = function(player) {
+
+    var cursorPos;
+    if (player == 1)
+        cursorPos = gridmanager.grid.cursor1;
+    if (player == 2)
+        cursorPos = gridmanager.grid.cursor2;
+
+    var pos = {x: Math.round(cursorPos.x-0.5), z: Math.round(cursorPos.z-0.5)};
+    var posKey = pos.x + ',' + pos.z;
+
+    var tower = gridmanager.grid[posKey];
+    if (tower != null && tower.type != null) {
+        gridmanager.grid[posKey] = null;
+        gridmath.clearPathCache(player);
+        var start, end;
+        if (player == 1) {
+            start = {x: -15, y: 1};
+            end = {x: 14, y: 1};
+        }
+        else if (player == 2) {
+            start = {x: 14, y: -2};
+            end = {x: -15, y: -2};
+        }
+        gridmath.aStar(start, end, player);
+
+        var cost = Math.round(0.95 * RESOURCE_COSTS[tower.type]);
+        if (!isNaN(cost))
+            resourcemanager['player' + player].resources += cost;
+
+        var index = this.towers.indexOf(tower);
+        if (index >= 0)
+            this.towers.splice(index, 1);
+
+        tower.destroy();
+    }
+};
 
 TowerManager.prototype.update = function() {
 	for(var i=0; i<this.towers.length;i++){

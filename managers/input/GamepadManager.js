@@ -22,8 +22,11 @@ function GamepadManager() {
                         towermanager.buildTower((state.player % 2) + 1, state.towerType);
                 });
                 GAMEPAD[i].on('b', function(value, state) {
+                    towermanager.sellTower(state.player);
+                    if (mirrorCursor)
+                        towermanager.sellTower((state.player % 2) + 1);
                 });
-                GAMEPAD[i].on('x', function(value, state) {
+                GAMEPAD[i].on('y', function(value, state) {
                     if (value) {
                         state.towerType = (TOWER_TYPES.length + state.towerType - 1) % TOWER_TYPES.length;
                         resourcemanager.highlight(state.player, state.towerType);
@@ -31,7 +34,7 @@ function GamepadManager() {
                             resourcemanager.highlight((state.player % 2) + 1, state.towerType);
                     }
                 });
-                GAMEPAD[i].on('y', function(value, state) {
+                GAMEPAD[i].on('x', function(value, state) {
                     if (value) {
                         state.towerType = ++state.towerType % TOWER_TYPES.length;
                         resourcemanager.highlight(state.player, state.towerType);

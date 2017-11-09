@@ -1,6 +1,10 @@
+
 function Minion(player) {
     this.player = player;
-	this.speed = 0.05;    //I don't know if this is an ok value
+    // thousands of a unit per update
+    this.speed = 50;    //I don't know if this is an ok value
+	//this.speed = 1 + Math.round(100 * Math.random());
+    console.log(this.speed);
     this.maxhealth = 8;
     this.health = this.maxhealth;
 	this.dead = false;
@@ -18,10 +22,14 @@ function Minion(player) {
     
 }
 
-Minion.prototype.moveUp = function () { GenericMove(this, "up", this.speed); }
-Minion.prototype.moveDown = function () { GenericMove(this, "down", -1 * this.speed); }
-Minion.prototype.moveLeft = function () { GenericMove(this, "left", -1 * this.speed); }
-Minion.prototype.moveRight = function () { GenericMove(this, "right", this.speed); }
+Minion.prototype.getRealSpeed = function() {
+    return this.speed / 1000;
+};
+
+Minion.prototype.moveUp = function () { GenericMove(this, "up", this.getRealSpeed()); }
+Minion.prototype.moveDown = function () { GenericMove(this, "down", -1 * this.getRealSpeed()); }
+Minion.prototype.moveLeft = function () { GenericMove(this, "left", -1 * this.getRealSpeed()); }
+Minion.prototype.moveRight = function () { GenericMove(this, "right", this.getRealSpeed()); }
 
 
 Minion.prototype.update = function () {
@@ -128,6 +136,10 @@ Minion.prototype.takeDamage= function(){
 	this.gameobj.material.diffuseColor = this.color;
 }
 
+Minion.prototype.centeredOn = function(axis) {
+    return Math.floor(this.gameobj.position[axis]) + 0.5 == Number(this.gameobj.position[axis].toFixed(2));
+};
+
 
 function GenericMove(minion,direction, speed)
 {
@@ -150,9 +162,7 @@ function GenericMove(minion,direction, speed)
 
             if (minion.direction == "left" || minion.direction == "right")
             {
-                var offset = 0.5;
-                
-                if (Math.floor(minion.gameobj.position.x) + offset == Number(minion.gameobj.position.x.toFixed(2))) {
+                if (minion.centeredOn('x')) {
                     minion.direction = null;
                     minion.isReadyToMove = true;
                 }
@@ -162,8 +172,7 @@ function GenericMove(minion,direction, speed)
             }
 
             if (minion.direction == "up" || minion.direction == "down") {
-                var offset = 0.5;
-                if (Math.floor(minion.gameobj.position.z) + offset == Number(minion.gameobj.position.z.toFixed(2))) {
+                if (minion.centeredOn('z')) {
                     minion.direction = null;
                     minion.isReadyToMove = true;
                 }

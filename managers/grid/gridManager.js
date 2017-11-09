@@ -11,7 +11,7 @@ function initGridManager()
 			minZ: mirror >0 ? 1.5 : -9.5
 		}
 		
-		cursor.gameobject = BABYLON.Mesh.CreateBox("plane", 1, scene);
+		cursor.gameobject = BABYLON.Mesh.CreateBox("plane", 1.1, scene);
 		cursor.gameobject.position.y = -.5;
 		cursor.gameobject.position.x=cursor.x;
 		cursor.gameobject.position.z = cursor.z;
