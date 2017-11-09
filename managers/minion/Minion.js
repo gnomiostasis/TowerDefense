@@ -1,9 +1,9 @@
 
 function Minion(player) {
     this.player = player;
-    // thousands of a unit per update
-    this.speed = 50;    //I don't know if this is an ok value
-	//this.speed = 1 + Math.round(100 * Math.random());
+    // speed is frame per unit
+    this.speed = 20;
+	//this.speed = 15 + Math.round(30 * Math.random());
     console.log(this.speed);
     this.maxhealth = 8;
     this.health = this.maxhealth;
@@ -23,7 +23,7 @@ function Minion(player) {
 }
 
 Minion.prototype.getRealSpeed = function() {
-    return this.speed / 1000;
+    return 1 / this.speed;
 };
 
 Minion.prototype.moveUp = function () { GenericMove(this, "up", this.getRealSpeed()); }
@@ -137,7 +137,7 @@ Minion.prototype.takeDamage= function(){
 }
 
 Minion.prototype.centeredOn = function(axis) {
-    return Math.floor(this.gameobj.position[axis]) + 0.5 == Number(this.gameobj.position[axis].toFixed(2));
+    return Math.floor(this.gameobj.position[axis]) + 0.5 == Number(this.gameobj.position[axis].toFixed(3));
 };
 
 
