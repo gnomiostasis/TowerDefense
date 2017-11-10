@@ -127,7 +127,7 @@ TowerManager.prototype.sellTower = function(player) {
             start = {x: 14, y: -2};
             end = {x: -15, y: -2};
         }
-        gridmath.aStar(start, end, player);
+        //gridmath.aStar(start, end, player);
 
         var cost = Math.round(0.95 * RESOURCE_COSTS[tower.type]);
         if (!isNaN(cost))

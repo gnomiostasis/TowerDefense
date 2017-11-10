@@ -4,7 +4,7 @@ function Minion(player) {
     // speed is frame per unit
     this.speed = 20;
 	//this.speed = 15 + Math.round(30 * Math.random());
-    console.log(this.speed);
+    //console.log(this.speed);
     this.maxhealth = 8;
     this.health = this.maxhealth;
 	this.dead = false;
@@ -137,11 +137,14 @@ Minion.prototype.takeDamage= function(){
 }
 
 Minion.prototype.centeredOn = function(axis) {
-    return Math.floor(this.gameobj.position[axis]) + 0.5 == Number(this.gameobj.position[axis].toFixed(3));
+    return this.getCenterOf(axis) === Number(this.gameobj.position[axis].toFixed(3));
+};
+Minion.prototype.getCenterOf = function(axis) {
+    return Math.floor(this.gameobj.position[axis]) + 0.5;
 };
 
 
-function GenericMove(minion,direction, speed)
+function GenericMove(minion, direction, speed)
 {
     if (minion.isReadyToMove) {
        minion.isReadyToMove = false;

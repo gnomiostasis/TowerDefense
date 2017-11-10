@@ -78,6 +78,21 @@ var gridmath = {
             return gridmath.hypot(end.x - tile.x, end.y - tile.y);
             //return Math.abs(end.x - tile.x) + Math.abs(end.y - tile.y);
         }
+        var getEmptyCoordsInRange = gridmath.getEmptyCoordsInRange;
+        if (cacheName != null) {
+            getEmptyCoordsInRange = function(p, r, includeSet) {
+                var result = gridmath.getCachedPath(cacheName, current);
+                if (result != null && result.length > 0) {
+                    var r = {x: result[0].x, y: result[0].y};
+                    var resultset = gridmath._set();
+                    resultset.add(r);
+                    return resultset;
+                }
+                else {
+                    return gridmath.getEmptyCoordsInRange(p, r, includeSet);
+                }
+            }
+        }
         // G: cost to get from start to tile
         current.G = 0;
         // F: cost to get from start to end through tile
@@ -93,7 +108,7 @@ var gridmath = {
             }
             openSet.delete(current);
             closedSet.add(current);
-            gridmath.getEmptyCoordsInRange(current, 1, includeSet).forEach(function(tile) {
+            getEmptyCoordsInRange(current, 1, includeSet).forEach(function(tile) {
                 if (!closedSet.has(tile)) {
                     tile.G = current.G + 1;
                     tile.F = tile.G + getH(tile);
