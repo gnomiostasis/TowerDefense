@@ -130,7 +130,15 @@
          scene.clearColor = new BABYLON.Color3(0, 0, 0);
          // This creates and positions a free camera
          var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 30, 0), scene);
-		 camera.inputs.clear();
+         //var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(5, 30, -5), scene); // orthogonal with upVector set
+         //var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 30, -5), scene); // orthogonal without upVector set
+         //camera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
+         //camera.upVector = new BABYLON.Vector3(4.9, 30, 0);
+         camera.orthoTop = 11.5;
+         camera.orthoBottom = -11.5;
+         camera.orthoLeft = -16.5;
+         camera.orthoRight = 16.5;
+         camera.inputs.clear();
          // This targets the camera to scene origin
          camera.setTarget(BABYLON.Vector3.Zero());
          // This attaches the camera to the canvas
